@@ -1,0 +1,168 @@
+[
+    {
+      "id": 1,
+      "tipo": "administrador",
+      "contrasena": "hashed_password_admin",
+      "usuario": "admin_user",
+      "correo": "admin@example.com",
+      "nombre": "Carlos",
+      "apellidoPaterno": "Gutiérrez",
+      "apellidoMaterno": "López",
+      "direccion_id": 100
+    },
+    {
+      "id": 2,
+      "tipo": "comun",
+      "contrasena": "hashed_password_1",
+      "usuario": "juanperez",
+      "correo": "juan.perez@example.com",
+      "nombre": "Juan",
+      "apellidoPaterno": "Pérez",
+      "apellidoMaterno": "Gómez",
+      "direccion_id": 101
+    },
+    {
+      "id": 3,
+      "tipo": "comun",
+      "contrasena": "hashed_password_2",
+      "usuario": "mariaruiz",
+      "correo": "maria.ruiz@example.com",
+      "nombre": "María",
+      "apellidoPaterno": "Ruiz",
+      "apellidoMaterno": "Fernández",
+      "direccion_id": 102
+    },
+    {
+      "id": 4,
+      "tipo": "comun",
+      "contrasena": "hashed_password_3",
+      "usuario": "luisgomez",
+      "correo": "luis.gomez@example.com",
+      "nombre": "Luis",
+      "apellidoPaterno": "Gómez",
+      "apellidoMaterno": "Sánchez",
+      "direccion_id": 103
+    },
+    {
+      "id": 5,
+      "tipo": "comun",
+      "contrasena": "hashed_password_4",
+      "usuario": "anagonzalez",
+      "correo": "ana.gonzalez@example.com",
+      "nombre": "Ana",
+      "apellidoPaterno": "González",
+      "apellidoMaterno": "Martínez",
+      "direccion_id": 104
+    },
+    {
+      "id": 6,
+      "tipo": "comun",
+      "contrasena": "hashed_password_5",
+      "usuario": "pedromartinez",
+      "correo": "pedro.martinez@example.com",
+      "nombre": "Pedro",
+      "apellidoPaterno": "Martínez",
+      "apellidoMaterno": "Díaz",
+      "direccion_id": 105
+    },
+    {
+      "id": 7,
+      "tipo": "comun",
+      "contrasena": "hashed_password_6",
+      "usuario": "sandratorres",
+      "correo": "sandra.torres@example.com",
+      "nombre": "Sandra",
+      "apellidoPaterno": "Torres",
+      "apellidoMaterno": "Ramos",
+      "direccion_id": 106
+    },
+    {
+      "id": 8,
+      "tipo": "comun",
+      "contrasena": "hashed_password_7",
+      "usuario": "miguelherrera",
+      "correo": "miguel.herrera@example.com",
+      "nombre": "Miguel",
+      "apellidoPaterno": "Herrera",
+      "apellidoMaterno": "Ortiz",
+      "direccion_id": 107
+    },
+    {
+      "id": 9,
+      "tipo": "comun",
+      "contrasena": "hashed_password_8",
+      "usuario": "rosalopez",
+      "correo": "rosa.lopez@example.com",
+      "nombre": "Rosa",
+      "apellidoPaterno": "López",
+      "apellidoMaterno": "Castillo",
+      "direccion_id": 108
+    },
+    {
+      "id": 10,
+      "tipo": "comun",
+      "contrasena": "hashed_password_9",
+      "usuario": "fernandorodriguez",
+      "correo": "fernando.rodriguez@example.com",
+      "nombre": "Fernando",
+      "apellidoPaterno": "Rodríguez",
+      "apellidoMaterno": "Mendoza",
+      "direccion_id": 109
+    },
+    {
+      "id": 11,
+      "tipo": "comun",
+      "contrasena": "hashed_password_10",
+      "usuario": "veronicaramirez",
+      "correo": "veronica.ramirez@example.com",
+      "nombre": "Verónica",
+      "apellidoPaterno": "Ramírez",
+      "apellidoMaterno": "Peña",
+      "direccion_id": 110
+    },
+    {
+      "id": 12,
+      "tipo": "comun",
+      "contrasena": "hashed_password_11",
+      "usuario": "josegarcia",
+      "correo": "jose.garcia@example.com",
+      "nombre": "José",
+      "apellidoPaterno": "García",
+      "apellidoMaterno": "Vega",
+      "direccion_id": 111
+    },
+    {
+      "id": 13,
+      "tipo": "comun",
+      "contrasena": "hashed_password_12",
+      "usuario": "claudiacastro",
+      "correo": "claudia.castro@example.com",
+      "nombre": "Claudia",
+      "apellidoPaterno": "Castro",
+      "apellidoMaterno": "Guzmán",
+      "direccion_id": 112
+    },
+    {
+      "id": 14,
+      "tipo": "comun",
+      "contrasena": "hashed_password_13",
+      "usuario": "alejandromendez",
+      "correo": "alejandro.mendez@example.com",
+      "nombre": "Alejandro",
+      "apellidoPaterno": "Méndez",
+      "apellidoMaterno": "Flores",
+      "direccion_id": 113
+    },
+    {
+      "id": 15,
+      "tipo": "comun",
+      "contrasena": "hashed_password_14",
+      "usuario": "patriciasilva",
+      "correo": "patricia.silva@example.com",
+      "nombre": "Patricia",
+      "apellidoPaterno": "Silva",
+      "apellidoMaterno": "Reyes",
+      "direccion_id": 114
+    }
+  ]
+  
