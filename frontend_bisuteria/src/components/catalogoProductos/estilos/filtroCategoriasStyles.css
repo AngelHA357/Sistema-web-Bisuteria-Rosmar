@@ -1,0 +1,27 @@
+.filtroCat {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 0;
+    margin: 0 20px;
+    place-content: center;
+    display:flex;
+    gap:20px;
+  }
+  
+  .filtroCat button {
+    background: none;
+    border: #4a4a4a solid 10%;
+    border-radius: 20px;
+    padding: 7px 30px;
+    color: #4a4a4a; 
+    font-size: 14px;
+    text-transform: capitalize;
+    cursor: pointer;
+    transition: border-bottom 0.2s ease;
+  }
+  
+  .filtroCat button.active {
+    border: 2px solid #f5e9dc; 
+    background-color: #f5e9dc;
+  }
