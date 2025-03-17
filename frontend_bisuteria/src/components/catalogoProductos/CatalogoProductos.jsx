@@ -8,20 +8,24 @@ import { TarjetaProducto } from './TarjetaProducto';
 export function CatalogoProductos() {
     const [productosState] = useState(productos)
     const [filtros, setFiltros] = useState({
-        categoria: 'todas'
+        categoria_id: ''
     }) 
 
 
     const filtrarProductos = (productos) => {
         return productos.filter(producto => {
             return (
-                filtros.categoria === 'todas' ||
-                producto.categoria === filtros.categoria
+                filtros.categoria_id === '' ||
+                producto.categoria_id === parseInt(filtros.categoria_id)
             )
         })
     }
 
     const productosFiltrados = filtrarProductos(productosState)
+
+    const handleCategoriaChange = (categoria_id) => {
+        setFiltros({ categoria_id });
+      };
 
     const handleCartClick = () => {
         console.log('Carrito clicked');
@@ -38,7 +42,9 @@ export function CatalogoProductos() {
                 onCartClick={handleCartClick}
                 onAccountClick={handleAccountClick}
             />
-            <FiltroCategorias
+            <FiltroCategorias 
+                activeCategoria={filtros.categoria_id}
+                onCategoriaChange={handleCategoriaChange} 
             />
             <div className='product-list'>
             {productosFiltrados.map((producto) => (
@@ -48,7 +54,7 @@ export function CatalogoProductos() {
                 image={producto.imagenes[0]}
                 name={producto.nombre}
                 price={producto.precio}
-                category={producto.categoria}
+                category={producto.categoria_id}
                 />        
             ))}
             </div>
