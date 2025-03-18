@@ -15,6 +15,7 @@ export function FiltroCategorias({activeCategoria, onCategoriaChange}) {
       {categorias.map((categoria) => (
         <button
         key={categoria.id}
+        className={activeCategoria === categoria.id ? 'active' : ''}
         onClick={() => onCategoriaChange(categoria.id)}
         >
             {categoria.nombre}
