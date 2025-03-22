@@ -1,19 +1,19 @@
-import express from 'express';
-import productosRouter from './routes/ProductoRouter';
-import * as dotenv from 'dotenv';
-import path from 'path';
+import 'dotenv/config'
+import app from './app';
 
-// Cargar variables de entorno del archivo .env
-dotenv.config({ path: path.resolve(__dirname, '../.env') });
-const app = express();
-const PORT = process.env.PORT || 3000;
+async function startServer() {
+  try {
+    const PORT = process.env.PORT || 3000;
 
+    app.listen(PORT, () => {
+      console.log(`🚀 Servidor ejecutándose en http://localhost:${PORT}`);
+    });
 
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
+  } catch (error) {
+    console.error('Error al iniciar el servidor:', error);
+    process.exit(1);
+  }
+}
 
-app.use('/api/productos', productosRouter);
-
-app.listen(PORT, () => {
-    console.log(`Servidor iniciado en el puerto ${PORT}`);
-});
+// Iniciar el servidor
+startServer();

@@ -1,15 +1,21 @@
-import express from 'express';
-import {getAll,getById} from '../controllers/ProductoController';
+import { Router } from 'express';
+import { createProducto, deleteProducto, getProducto, getProductos, updateProducto } from '../controllers/ProductoController';
+import { controlImages } from '../middlewares/uploadImages';
 
-const router = express.Router();
+export class ProductoRouter {
+  public router: Router;
+    private upload = controlImages('productos');
 
-router.get('/', async (req, res) => {
-    const data =  await getAll();
-    res.status(200).json(data);
-});
-router.get('/{id}', async (req, res) => {
-    return await getById(1);
-});
+  constructor() {
+    this.router = Router();
+    this.initializeRoutes();
+  }
 
-
-export default router;
+  private initializeRoutes(): void {
+    this.router.get('/', getProductos);
+    this.router.get('/:id', getProducto);
+    this.router.post('/', this.upload.single('file'), createProducto);
+    this.router.put('/:id', updateProducto);
+    this.router.delete('/:id', deleteProducto);
+  }
+}

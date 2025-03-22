@@ -6,14 +6,15 @@ Se elabora un sitio web para un catalogo en linea de venta de bisutería
   - José Karim Franco Valencia - Backend
   - José Angel Huerta Amparán - Frontend - Alias "Wacho"
   - Víctor Humberto Encinas Guzmán - Frontend 
-
+  - Pablo Cesar Flores Bautista - Frontend
 
 ### Estructura del backend de proyecto
+```
 proyecto/
 ├── src/                      # Código fuente
 │   ├── config/               # Configuraciones de la aplicación
 │   │   ├── database.ts       # Configuración de base de datos
-│   │   ├── middleware.ts     # Configuraciones de middlewares 
+│   │   ├── middleware.ts     # Configuraciones de middlewares
 │   │   └── index.ts          # Exporta todas las configuraciones
 │   ├── controllers/          # Controladores que manejan las peticiones
 │   │   ├── user.controller.ts
@@ -40,3 +41,4 @@ proyecto/
 ├── tsconfig.json             # Configuración de TypeScript
 ├── package.json              # Dependencias y scripts
 └── README.md                 # Documentación
+```
