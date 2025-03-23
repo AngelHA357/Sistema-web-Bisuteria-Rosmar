@@ -3,11 +3,12 @@ import 'dotenv/config'
 import { Categoria } from "../entities/Categoria";
 import { Direccion } from "../entities/Direccion";
 import { Producto } from "../entities/Producto";
-import { Cliente, TipoCliente } from "../entities/Cliente";
+import { Cliente} from "../entities/Cliente";
 import { Carrito } from "../entities/Carrito";
 import { Pedido } from "../entities/Pedido";
 import { PedidoProducto } from "../entities/PedidoProducto";
-import { createHashPassword } from "../utils/encrypt";
+import { categoriasInsercion, clientesInsercion, productosInsercion } from "../utils/insersionMasiva";
+import { ProductoMap } from "../domain/producto/producto.mapper";
 
 
 const contextDB = new DataSource({
@@ -53,72 +54,20 @@ async function insertarDatosIniciales() {
     try {
         const categoriaRepository = contextDB.getRepository(Categoria);
         const clienteRepository = contextDB.getRepository(Cliente);
-        const categorias = [
-            { nombre: "Pulseras" },
-            { nombre: "Aretes" },
-            { nombre: "Collares" },
-            { nombre: "Plumas" },
-            { nombre: "Otros" }
-        ];
-
-        const admins= [
-            {
-                correo: 'bisuteria@rosmar.com',
-                nombre: 'Rosa María',
-                apellidoPaterno: 'Amparán',
-                apellidoMaterno: 'Castañeda',
-                contrasena: createHashPassword('Admin_123'),
-                tipo: TipoCliente.ADMINISTRADOR,
-            },
-            {
-                correo: 'admin@admin.com',
-                nombre: 'Elva Lizeth',
-                apellidoPaterno: 'Gutierrez',
-                apellidoMaterno: 'Mendivil',
-                contrasena: createHashPassword('Admin_123'),
-                tipo: TipoCliente.ADMINISTRADOR,
-            },
-            {
-                correo: 'wacho@gmail.com',
-                nombre: 'Jose Angel',
-                apellidoPaterno: 'Huerta',
-                apellidoMaterno: 'Amparán',
-                contrasena: createHashPassword('Wacho_27'),
-                tipo: TipoCliente.NORMAL,
-            },
-            {
-                correo: 'karim@gmail.com',
-                nombre: 'Jose Karim',
-                apellidoPaterno: 'Franco',
-                apellidoMaterno: 'Valencia',
-                contrasena: createHashPassword('Karim_27'),
-                tipo: TipoCliente.NORMAL,
-            },
-            {
-                correo: 'victor@gmail.com',
-                nombre: 'Victor Humberto',
-                apellidoPaterno: 'Encinas',
-                apellidoMaterno: 'Guzman',
-                contrasena: createHashPassword('Toroo_15'),
-                tipo: TipoCliente.NORMAL,
-            },
-            {
-                correo: 'pablo@gmail.com',
-                nombre: 'Pablo Cesar',
-                apellidoPaterno: 'Flores',
-                apellidoMaterno: 'Bautista',
-                contrasena: createHashPassword('Pablo_05'),
-                tipo: TipoCliente.NORMAL,
-            }
-        ]
+        const productoRepository = contextDB.getRepository(Producto)
         
-        for (const categoriaData of categorias) {
+        const productos = productosInsercion.map(p=> ProductoMap.ToEntityFromInsercion(p));
+        for (const categoriaData of categoriasInsercion) {
             const categoria = categoriaRepository.create(categoriaData);
             await categoriaRepository.save(categoria);
         }
-        for (const clienteData of admins) {
+        for (const clienteData of clientesInsercion) {
             const cliente = clienteRepository.create(clienteData);
             await clienteRepository.save(cliente);
+        }
+        for (const producto of productos) {
+            const pro:Producto = productoRepository.create(producto);
+            await productoRepository.save(pro);
         }
         
 

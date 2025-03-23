@@ -1,6 +1,6 @@
 import { CategoriaService } from "../services/CategoriaService";
 import { Request, Response } from "express";
-import { NotFound } from "../types/Error";
+import { NotFound } from "../types/error.types";
 import { CategoriaCreateDTO, CategoriaDTO, CategoriaUpdateDTO } from "../domain/categoria/categoria.dto";
 import { CategoriaMapper } from "../domain/categoria/categoria.mapper";
 import { ServiceError } from "../error/ServiceError";
@@ -66,7 +66,7 @@ async function deleteCategoria(req: Request, res: Response): Promise<void>{
   try{
     let id: number = parseInt(req.params.id);
     const categoriaBorrada = await categoriaService.deleteCategoria(id);
-    
+
     res.status(200).send(CategoriaMapper.ToDTO(categoriaBorrada));    
   }catch(error){
     if(error instanceof ServiceError){
@@ -84,5 +84,5 @@ export {
   getCategoria,
   createCategoria,
   updateCategoria,
-  deleteCategoria
+  deleteCategoria,
 }

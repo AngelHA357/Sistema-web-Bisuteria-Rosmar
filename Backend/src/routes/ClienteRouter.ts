@@ -1,6 +1,6 @@
 import { Router, Request, Response } from 'express';
 import { getCliente, logInCliente, registerCliente, signOutCliente } from '../controllers/ClienteController';
-import validateWithZod from '../middlewares/validation';
+import {validateWithZod} from '../middlewares/validation';
 import { ClienteCreateSchema, ClienteLogInSchema } from '../domain/cliente/cliente.schema';
 import { verifyAuth } from '../middlewares/token';
 
