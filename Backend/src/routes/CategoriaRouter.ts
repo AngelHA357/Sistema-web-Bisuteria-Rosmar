@@ -1,4 +1,3 @@
-// src/routes/user.routes.ts
 import { Router } from 'express';
 import { createCategoria, deleteCategoria, getCategoria, getCategorias, updateCategoria } from '../controllers/CategoriaController';
 import validateWithZod from '../middlewares/validation';
@@ -14,7 +13,7 @@ export class CategoriaRoutes {
   }
 
   private initializeRoutes(): void {
-    this.router.get('/', getCategorias);
+    this.router.get('/',getCategorias);
     this.router.get('/:id', getCategoria);
     this.router.post('/', validateWithZod(CategoriaSchema), createCategoria);
     this.router.put('/', validateWithZod(UpdateCategoriaSchema),updateCategoria);
