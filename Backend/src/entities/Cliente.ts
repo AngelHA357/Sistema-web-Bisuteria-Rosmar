@@ -2,9 +2,9 @@ import { Column, Entity, JoinColumn, OneToMany, PrimaryGeneratedColumn } from "t
 import { Direccion } from "./Direccion";
 import { Carrito } from "./Carrito";
 
-enum TipoCliente{
-  NORMAL,
-  ADMINISTRADOR
+export enum TipoCliente{
+  NORMAL ="Normal",
+  ADMINISTRADOR="Administrador"
 }
 
 @Entity({name: 'clientes'})
@@ -19,10 +19,8 @@ export class Cliente{
     default:TipoCliente.NORMAL})
   tipo:TipoCliente;
 
-  @Column({length:100,type:"varchar"})
+  @Column({length:80,type:"varchar"})
   contrasena:string;
-  @Column({length:100,type:"varchar"})
-  usuario:string;
   @Column({length:100,type:"varchar"})
   correo:string;
   @Column({length:50,type:"varchar"})

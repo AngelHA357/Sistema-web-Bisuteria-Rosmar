@@ -27,7 +27,7 @@ export class Producto{
     array:true,
     nullable:true
   })
-  color: string;
+  colores: string[];
 
   @Column({
       type:"float",
