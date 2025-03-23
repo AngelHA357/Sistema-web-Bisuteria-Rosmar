@@ -4,9 +4,9 @@ import './estilos/filtroCategoriasStyles.css';
 export function FiltroCategorias({activeCategoria, onCategoriaChange}) {
   const categorias = [
     { id: '', nombre: 'ver todo' },
-    { id: 1, nombre: 'Pulseras' },
-    { id: 2, nombre: 'Collares' },
-    { id: 3, nombre: 'Aretes' },
+    { id: 1, nombre: 'Collares' },
+    { id: 2, nombre: 'Aretes' },
+    { id: 3, nombre: 'Pulseras' },
     { id: 4, nombre: 'Otros' },
   ];
 

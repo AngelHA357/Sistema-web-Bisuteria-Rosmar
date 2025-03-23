@@ -2,11 +2,12 @@ import logoBisuteria from '/imgs/logo_bisuteria_acceso_usuario.png';
 import { CampoDato } from './CampoDato';
 import { BarraOpciones } from './BarraOpciones';
 import { BotonConfirmar } from './botonConfirmar';
-import { CatalogoProductos } from '../catalogoProductos/CatalogoProductos';
 import './accesoUsuarioStyles.css';
 import React, { useState, useEffect} from 'react';
+import { useNavigate } from 'react-router-dom';
 
 export function AccesoUsuario() {
+    const navigate = useNavigate();
     const [modoAcceso, setModoAcceso] = useState('login');
     const [formData, setFormData] = useState({
         email: '',
@@ -130,6 +131,7 @@ export function AccesoUsuario() {
         if (usuario) {
           setMensaje('Inicio de sesión exitoso');
           setLogueado(true);
+          navigate('/catalogo'); 
         } else {
           setMensaje('Correo o contraseña incorrectos');
         }
@@ -138,10 +140,6 @@ export function AccesoUsuario() {
       const handleSubmit = () => {
         modoAcceso === 'login' ? verificarLogin() : agregarUsuario();
       };
-
-      if (logueado) {
-        return <CatalogoProductos />;
-    }
 
     return (
         <div className="acceso-usuario">

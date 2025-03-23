@@ -10,7 +10,8 @@
 }
 
 .barraNav .logo {
-  max-width: 150px; 
+  max-width: 150px;
+  cursor: pointer;
 }
 
 .barraNav .user-actions {
@@ -27,4 +28,5 @@
   display: flex;
   align-items: center;
   gap: 5px;
+  font-family: "Gidole", sans-serif;
 }

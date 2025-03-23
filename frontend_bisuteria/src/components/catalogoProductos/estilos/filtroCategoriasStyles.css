@@ -19,6 +19,7 @@
     text-transform: capitalize;
     cursor: pointer;
     transition: border-bottom 0.2s ease;
+    font-family: "Gidole", sans-serif;
   }
   
   .filtroCat button.active {
