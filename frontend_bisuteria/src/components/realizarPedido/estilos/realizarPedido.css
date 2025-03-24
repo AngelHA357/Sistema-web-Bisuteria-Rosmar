@@ -1,0 +1,51 @@
+.rosmar-checkout {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: #fff;
+  font-family: Arial, sans-serif;
+}
+
+.checkout-container {
+  display: flex;
+  width: 90%;
+  max-width: 80%;
+  height: 80vh;
+  background-color: white;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.left-panel {
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+}
+
+.left-panel h1 {
+  margin-bottom: 30px;
+  font-size: 2rem;
+  color: #333;
+}
+
+.payment-methods {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.payment-methods button {
+  padding: 12px 20px;
+  background-color: white;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.payment-methods button.active,
+.payment-methods button:hover {
+  background-color: #8B7355;
+  color: white;
+}
