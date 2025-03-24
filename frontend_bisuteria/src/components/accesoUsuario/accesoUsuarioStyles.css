@@ -1,0 +1,90 @@
+/* Estilos generales */
+body {
+    background-color: #f3e9dd;
+    font-family: Arial, sans-serif;
+    text-align: center;
+}
+
+/* Contenedor principal */
+.acceso-usuario {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+}
+
+/* Logo */
+.acceso-usuario img {
+    max-width: 250px;
+    margin-bottom: 20px;
+}
+
+/* Estilos para el formulario */
+.formulario {
+    background-color: white;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+    width: 350px;
+}
+
+/* Estilos para la barra de opciones */
+.barra-opciones {
+    display: flex;
+    justify-content: space-around;
+    border-bottom: 2px solid #ddd;
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+}
+
+.barra-opciones div {
+    cursor: pointer;
+    padding: 5px 10px;
+    font-weight: bold;
+    color: #444;
+}
+
+.barra-opciones .activo {
+    border-bottom: 2px solid black;
+}
+
+/* Campos de entrada */
+.campo-dato {
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+    margin-bottom: 15px;
+}
+
+.campo-dato label {
+    font-size: 14px;
+    color: #333;
+    margin-bottom: 5px;
+}
+
+.campo-dato input {
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    width: 100%;
+    font-size: 14px;
+}
+
+/* Botón de confirmación */
+.boton-confirmar {
+    background-color: #a97c50;
+    color: white;
+    border: none;
+    padding: 10px;
+    width: 100%;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+    margin-top: 10px;
+}
+
+.boton-confirmar:hover {
+    background-color: #8c6440;
+}
