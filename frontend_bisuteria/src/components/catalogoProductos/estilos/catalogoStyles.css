@@ -11,3 +11,22 @@ body{
     padding: 20px;
     margin: 0 20px;
   }
+
+#btn-add-product{
+    padding: 0.5%;
+    display: flex;
+    justify-content: center;
+    margin-left: 3%;
+    width: 14rem;
+    font-size: 20px;
+    background-color: #D2C5B4;
+    border: solid #A48A69;
+    font-weight: bold;
+    border-radius: 20px;
+    transition: transform 0.2s ease;
+    cursor: pointer;
+}
+
+#btn-add-product:hover {
+    transform: scale(1.05);
+}
