@@ -1,51 +1,159 @@
-.rosmar-checkout {
+body{
+  background-color: white;
+  padding: 0;
+  margin: 0;
+}
+
+.realizar-pedido-container {
   display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-  background-color: #fff;
+  flex-direction: column;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
   font-family: Arial, sans-serif;
 }
 
-.checkout-container {
-  display: flex;
-  width: 90%;
-  max-width: 80%;
-  height: 80vh;
-  background-color: white;
-  border-radius: 8px;
-  overflow: hidden;
-}
-
-.left-panel {
-  padding: 30px;
-  display: flex;
-  flex-direction: column;
-}
-
-.left-panel h1 {
-  margin-bottom: 30px;
+.titulo {
   font-size: 2rem;
-  color: #333;
+  margin-bottom: 30px;
+  font-weight: 800;
+  text-align: left;
 }
 
-.payment-methods {
+.realizar-pedido-content {
+  display: flex;
+  gap: 100px;
+}
+
+.formas-pago {
+  flex: 1;
   display: flex;
   flex-direction: column;
-  gap: 15px;
+  gap: 10px;
 }
 
-.payment-methods button {
-  padding: 12px 20px;
+.contenido-derecho {
+  flex: 2;
+  min-height: 300px;
+}
+
+.subtitulo {
+  font-size: 1.5rem;
+  font-weight: 700;
+  text-align: left;
+  margin: 10px 0;
+}
+
+.subsubtitulo{
+  font-size: 1.2rem;
+  font-weight: 200;
+  text-align: left;
+  margin: 10px 0;
+}
+
+.forma-pago-btn {
+  padding: 12px 15px;
+  border: 1px solid #c0a080;
   background-color: white;
-  border: 1px solid #ccc;
   border-radius: 5px;
+  text-align: left;
   cursor: pointer;
-  transition: all 0.3s ease;
+  font-size: 16px;
+  transition: all 0.2s;
 }
 
-.payment-methods button.active,
-.payment-methods button:hover {
-  background-color: #8B7355;
+.forma-pago-btn.active {
+  background-color: #c0a080;
   color: white;
 }
+
+.forma-pago-btn:hover:not(.active) {
+  background-color: #f5f0e8;
+}
+
+.direcciones-container {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.direccion-btn {
+  padding: 12px 15px;
+  border: 1px solid #c0a080;
+  background-color: white;
+  border-radius: 5px;
+  text-align: left;
+  cursor: pointer;
+  font-size: 16px;
+  transition: all 0.2s;
+}
+
+.direccion-btn.active {
+  background-color: #c0a080;
+  color: white;
+}
+
+.direccion-btn:hover:not(.active) {
+  background-color: #f5f0e8;
+}
+
+.direccion-detalles {
+  margin-top: 15px;
+  padding-left: 5vh;
+  background-color: #f9f3e9;
+  border-radius: 5px;
+  text-align: left;
+  border: 1px solid #e0d0b0;
+}
+
+.texto-direccion {
+  font-size: 16px;
+  margin-bottom: 2vh;
+}
+
+.nota-transferencia {
+  margin-top: 20px;
+  padding: 15px;
+  background-color: #f9f3e9;
+  border-radius: 5px;
+}
+
+.nota-transferencia h3 {
+  font-size: 16px;
+  margin-bottom: 5px;
+}
+
+.punto-entrega {
+  padding: 15px;
+  border-radius: 5px;
+}
+
+.confirmar-container {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 30px;
+}
+
+.formulario-container{
+  display: flex;
+  flex-direction: column;
+  border-radius: 5px;
+  padding-left: 50px;
+}
+
+.confirmar-btn {
+  padding: 10px 25px;
+  background-color: #8a7666;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.2s;
+}
+
+.confirmar-btn:hover {
+  background-color: #6d5d4e;
+}
+

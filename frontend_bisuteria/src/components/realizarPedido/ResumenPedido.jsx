@@ -1,87 +1,53 @@
-import React, { useState, useEffect } from 'react';
-import './estilos/resumenPedido.css';
+import "./estilos/resumenPedido.css"
 
-const ResumenPedido = ({ formData }) => {
-  const [pedido, setPedido] = useState({ items: [], total: 0 });
-  const [direcciones, setDirecciones] = useState([]);
-  const [cargando, setCargando] = useState(true);
-  const [error, setError] = useState(null);
-
-  useEffect(() => {
-    const fetchPedidodata = async () => {
-      try {
-        setCargando(true);
-        setError(null);
-
-        const pedidoResponse = await fetch('/pedidoData.json');
-        if (!pedidoResponse.ok) {
-          throw new Error('Error al cargar los datos del pedido');
-        }
-        const pedidoData = await pedidoResponse.json();
-        setPedido(pedidoData);
-
-        const direccionesResponse = await fetch('/direcciones.json');
-        if (!direccionesResponse.ok) {
-          throw new Error('Error al cargar las direcciones guardadas');
-        }
-        const direccionData = await direccionesResponse.json();
-        setDirecciones(direccionData);
-      } catch (err) {
-        setError(err.message);
-      } finally {
-        setCargando(false);
-      }
-    };
-
-    fetchPedidodata();
-  }, []);
-
-  const getNombreDireccion = () => {
-    if (!formData.idDireccionSeleccionada) {
-      return 'Nueva dirección';
-    }
-    const seleccionado = direcciones.find((dir) => dir.id === formData.idDireccionSeleccionada);
-    return seleccionado ? `Dirección guardada ${seleccionado.id}` : 'Dirección guardada 1';
-  };
-
-  if (cargando) {
-    return <div className="container"><p className="loading">Cargando...</p></div>;
-  }
-
-  if (error) {
-    return <div className="container"><p className="error">Error: {error}</p></div>;
-  }
+const ResumenPedido = ({ resumenData, formaPago, direccionSeleccionada, direccionesGuardadas, onVolver }) => {
+  const direccionElegida = direccionesGuardadas.find((dir) => dir.id === direccionSeleccionada)
 
   return (
-    <div>
-      <h2 className="title">Resumen de pedido</h2>
-      <div className="summary-section">
-        {pedido.items.map((item, index) => (
-          <div key={index} className="summary-item">
-            <span>{item.descripcion}</span>
-            <span>${item.cantidad.toFixed(2)}</span>
+    <div className="resumen-pedido-container">
+      <h1 className="titulo">Resumen de pedido</h1>
+
+      <div className="resumen-content">
+        <div className="resumen-item">
+          <span className="resumen-label">Productos ({resumenData.productos.cantidad})</span>
+          <span className="resumen-value">${resumenData.productos.total.toFixed(2)}</span>
+        </div>
+
+        <div className="resumen-item">
+          <span className="resumen-label">Envío</span>
+          <span className="resumen-value">${resumenData.envio.toFixed(2)}</span>
+        </div>
+
+        <div className="resumen-item total">
+          <span className="resumen-label">Total</span>
+          <span className="resumen-value">${resumenData.total.toFixed(2)}</span>
+        </div>
+
+        <div className="resumen-separator"></div>
+
+        <div className="resumen-item">
+          <span className="resumen-label">Tipo de pago</span>
+          <span className="resumen-value">{formaPago === "presencial" ? "Presencial" : "Transferencia"}</span>
+        </div>
+
+        {formaPago === "transferencia" && direccionElegida && (
+          <div className="resumen-item">
+            <span className="resumen-label">Domicilio</span>
+            <span className="resumen-value">{direccionElegida.direccion}</span>
           </div>
-        ))}
-        <div className="summary-item total">
-          <span>TOTAL</span>
-          <span>${pedido.total.toFixed(2)}</span>
-        </div>
+        )}
       </div>
-      <div className="summary-section">
-        <div className="summary-item">
-          <span>Tipo de pago</span>
-          <span>{formData.metodoPago === 'transferencia' ? 'Transferencia' : 'Presencial'}</span>
-        </div>
-        <div className="summary-item">
-          <span>Domicilio</span>
-          <span>{getNombreDireccion()}</span>
-        </div>
-      </div>
-      <div className="button-group">
-        <button className="action-button primary">Confirmar</button>
+
+      <div className="confirmar-container">
+        <button className="confirmar-btn" onClick={() => alert("¡Pedido confirmado!")}>
+          Confirmar
+        </button>
+        <button className="volver-btn" onClick={onVolver}>
+          Volver
+        </button>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default ResumenPedido;
+export default ResumenPedido

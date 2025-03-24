@@ -1,27 +1,83 @@
-.summary-section {
-    margin-top: 20px;
-  }
-  
-  .summary-item {
-    display: flex;
-    justify-content: space-between;
-    padding: 10px 0;
-    border-bottom: 1px solid #ddd;
-  }
-  
-  .summary-item.total {
-    font-weight: bold;
-    font-size: 18px;
-  }
-  
-  .loading {
-    text-align: center;
-    font-size: 16px;
-    color: #666;
-  }
-  
-  .error {
-    text-align: center;
-    font-size: 16px;
-    color: red;
-  }
+.resumen-pedido-container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 20px;
+  font-family: Arial, sans-serif;
+}
+
+.titulo {
+  font-size: 2rem;
+  margin-bottom: 30px;
+  font-weight: 800;
+  text-align: center;
+}
+
+.resumen-content {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.resumen-item {
+  display: flex;
+  justify-content: space-between;
+  font-size: 16px;
+}
+
+.resumen-label {
+  font-weight: normal;
+}
+
+.resumen-value {
+  font-weight: bold;
+}
+
+.resumen-item.total {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.resumen-separator {
+  height: 1px;
+  background-color: #ddd;
+  margin: 10px 0;
+}
+
+.confirmar-container {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  margin-top: 40px;
+}
+
+.confirmar-btn {
+  padding: 10px 25px;
+  background-color: #8a7666;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.2s;
+}
+
+.confirmar-btn:hover {
+  background-color: #6d5d4e;
+}
+
+.volver-btn {
+  padding: 10px 25px;
+  background-color: #f0f0f0;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.volver-btn:hover {
+  background-color: #e0e0e0;
+}
+
