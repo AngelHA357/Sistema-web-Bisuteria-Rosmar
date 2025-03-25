@@ -115,8 +115,9 @@ export function NuevoProducto() {
   };
 
   return (
+    <>
+    <BarraNavegacion />
     <div className="nuevo-producto-container">
-      <BarraNavegacion />
       <h2>Nuevo producto</h2>
       <form className="nuevo-producto-form" onSubmit={handleSubmit}>
         <div className="form-group">
@@ -195,5 +196,6 @@ export function NuevoProducto() {
       </form>
       {mensaje && <p className="mensaje">{mensaje}</p>}
     </div>
+    </>
   );
 }

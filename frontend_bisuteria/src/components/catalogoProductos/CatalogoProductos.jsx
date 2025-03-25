@@ -61,6 +61,7 @@ export function CatalogoProductos() {
 
   return (
     <>
+    <div className="catalogo-page">
       <BarraNavegacion />
       <FiltroCategorias
         activeCategoria={filtros.categoria} 
@@ -85,6 +86,7 @@ export function CatalogoProductos() {
         ) : (
           <p>No hay productos disponibles.</p>
         )}
+      </div>
       </div>
     </>
   );
