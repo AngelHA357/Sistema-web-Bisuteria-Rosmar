@@ -3,6 +3,16 @@ import "./estilos/resumenPedido.css"
 const ResumenPedido = ({ resumenData, formaPago, direccionSeleccionada, direccionesGuardadas, onVolver }) => {
   const direccionElegida = direccionesGuardadas.find((dir) => dir.id === direccionSeleccionada)
 
+  const formatearDireccion = (dir) => {
+    if (!dir) return ""
+
+    let direccionCompleta = `${dir.calle} ${dir.numeroExterior}`
+    if (dir.numeroInterior) {
+      direccionCompleta += `, Int. ${dir.numeroInterior}`
+    }
+    return direccionCompleta
+  }
+
   return (
     <div className="resumen-pedido-container">
       <h1 className="titulo">Resumen de pedido</h1>
@@ -33,7 +43,7 @@ const ResumenPedido = ({ resumenData, formaPago, direccionSeleccionada, direccio
         {formaPago === "transferencia" && direccionElegida && (
           <div className="resumen-item">
             <span className="resumen-label">Domicilio</span>
-            <span className="resumen-value">{direccionElegida.direccion}</span>
+            <span className="resumen-value">{formatearDireccion(direccionElegida)}</span>
           </div>
         )}
       </div>

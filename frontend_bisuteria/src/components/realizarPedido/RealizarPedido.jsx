@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import FormularioDireccion from "./FormDireccion"
-import ResumenPedido from './ResumenPedido';
+import ResumenPedido from './resumenPedido';
 import './estilos/realizarPedido.css';
 
 const RealizarPedido = () => {
@@ -12,16 +12,22 @@ const RealizarPedido = () => {
   const [direccionesGuardadas, setDireccionesGuardadas] = useState([
     {
       id: 1,
-      direccion: "Principal 123",
+      calle: "Calle Principal",
+      numeroExterior: "123",
+      numeroInterior: "4B",
       codigoPostal: "12345",
+      estado: "CDMX",
       ciudad: "Ciudad de México",
       colonia: "Centro",
       indicaciones: "Edificio azul",
     },
     {
       id: 2,
-      direccion: "Secundaria 456",
+      calle: "Avenida Secundaria",
+      numeroExterior: "456",
+      numeroInterior: "",
       codigoPostal: "67890",
+      estado: "Jalisco",
       ciudad: "Guadalajara",
       colonia: "Moderna",
       indicaciones: "Casa blanca",
@@ -132,7 +138,7 @@ const RealizarPedido = () => {
                   className={`direccion-btn ${direccionSeleccionada === dir.id ? "active" : ""}`}
                   onClick={() => handleDireccionClick(dir.id)}
                 >
-                  {dir.direccion}
+                  {dir.calle} {dir.numeroExterior} {dir.numeroInterior && `Int. ${dir.numeroInterior}`}
                 </button>
               ))}
 
@@ -140,10 +146,21 @@ const RealizarPedido = () => {
                 <div className="direccion-detalles">
                   <h3>Detalles de la dirección:</h3>
                   <p className='texto-direccion'>
-                    <strong>Direccion:</strong> {direccionElegida.direccion}
+                    <strong>Calle:</strong> {direccionElegida.calle}
                   </p>
                   <p className='texto-direccion'>
+                    <strong>Número exterior:</strong> {direccionElegida.numeroExterior}
+                  </p>
+                  {direccionElegida.numeroInterior && (
+                    <p className='texto-direccion'>
+                      <strong>Número interior:</strong> {direccionElegida.numeroInterior}
+                    </p>
+                  )}
+                  <p className='texto-direccion'>
                     <strong>Código Postal:</strong> {direccionElegida.codigoPostal}
+                  </p>
+                  <p className='texto-direccion'>
+                    <strong>Estado:</strong> {direccionElegida.estado}
                   </p>
                   <p className='texto-direccion'>
                     <strong>Ciudad:</strong> {direccionElegida.ciudad}
