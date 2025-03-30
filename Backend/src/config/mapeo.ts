@@ -7,8 +7,9 @@ import { Cliente} from "../entities/Cliente";
 import { Carrito } from "../entities/Carrito";
 import { Pedido } from "../entities/Pedido";
 import { PedidoProducto } from "../entities/PedidoProducto";
-import { categoriasInsercion, clientesInsercion, productosInsercion } from "../utils/insersionMasiva";
+import { categoriasInsercion, clientesInsercion, direccionInsercion, productosInsercion } from "../utils/insersionMasiva";
 import { ProductoMap } from "../domain/producto/producto.mapper";
+import { DireccionMap } from "../domain/direccion/direccion.mapper";
 
 
 const contextDB = new DataSource({
@@ -54,9 +55,11 @@ async function insertarDatosIniciales() {
     try {
         const categoriaRepository = contextDB.getRepository(Categoria);
         const clienteRepository = contextDB.getRepository(Cliente);
-        const productoRepository = contextDB.getRepository(Producto)
+        const productoRepository = contextDB.getRepository(Producto);
+        const direccionRepository = contextDB.getRepository(Direccion);
         
         const productos = productosInsercion.map(p=> ProductoMap.ToEntityFromInsercion(p));
+        const direcciones = direccionInsercion.map(d=> DireccionMap.ToEntityFromCreate(d));
         for (const categoriaData of categoriasInsercion) {
             const categoria = categoriaRepository.create(categoriaData);
             await categoriaRepository.save(categoria);
@@ -68,6 +71,10 @@ async function insertarDatosIniciales() {
         for (const producto of productos) {
             const pro:Producto = productoRepository.create(producto);
             await productoRepository.save(pro);
+        }
+        for (const direccion of direcciones) {
+            const direc:Direccion = direccionRepository.create(direccion);
+            await direccionRepository.save(direc);
         }
         
 
