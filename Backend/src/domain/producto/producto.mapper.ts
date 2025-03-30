@@ -28,6 +28,9 @@ export class ProductoMap{
     entity.colores = dto.colores.slice();
     return entity
   }
+
+
+  //Esto es solo usable para la insersion masiva.
   static ToEntityFromInsercion(dto: ProductoCreateDTO): Producto{
     let entity = new Producto();
     entity.nombre = dto.nombre;

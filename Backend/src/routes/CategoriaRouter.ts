@@ -4,7 +4,7 @@ import {validateWithZod} from '../middlewares/validation';
 import { CategoriaSchema, UpdateCategoriaSchema } from '../domain/categoria/categoria.schema';
 
 
-export class CategoriaRoutes {
+export class CategoriaRouter {
   public router: Router;
 
   constructor() {
