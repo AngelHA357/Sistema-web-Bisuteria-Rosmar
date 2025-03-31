@@ -168,11 +168,10 @@ export function NuevoProducto() {
         <div className="form-group">
           <label>Colores:</label>
           <input
-            type="text"
+            type="color"
             name="colores"
             value={formData.colores}
             onChange={handleChange}
-            placeholder='["#FF0000","#00FF00"]'
           />
         </div>
         <div className="form-group">
