@@ -1,6 +1,6 @@
 export function BotonConfirmar({ textoBoton, onClick }) {
     return (
-      <button className="boton-confirmar" onClick={onClick}>
+      <button type="submit" className="boton-confirmar" onClick={onClick}>
         {textoBoton}
       </button>
     );

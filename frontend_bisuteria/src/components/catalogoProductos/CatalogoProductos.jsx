@@ -1,63 +1,91 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { BarraNavegacion } from './BarraNavegacion';
 import { FiltroCategorias } from './FiltroCategorias';
-import productos from '../../mocks/productos.json'
 import './estilos/catalogoStyles.css';
 import { TarjetaProducto } from './TarjetaProducto';
+import { UserContext } from '../../context/UserContext';
 
 export function CatalogoProductos() {
-    const [productosState] = useState(productos)
-    const [filtros, setFiltros] = useState({
-        categoria_id: ''
-    }) 
+  const navigate = useNavigate();
+  const { usuario, logout, token } = useContext(UserContext);
+  const [productosState, setProductosState] = useState([]);
+  const [filtros, setFiltros] = useState({
+    categoria: 'Ver todo' 
+  });
 
-
-    const filtrarProductos = (productos) => {
-        return productos.filter(producto => {
-            return (
-                filtros.categoria_id === '' ||
-                producto.categoria_id === parseInt(filtros.categoria_id)
-            )
-        })
+  useEffect(() => {
+    if (token) {
+      fetchProductos(filtros.categoria);
+    } else {
+      navigate('/');
     }
+  }, [token, filtros.categoria, navigate]);
 
-    const productosFiltrados = filtrarProductos(productosState)
+  const fetchProductos = async (categoriaNombre = 'Ver todo') => {
+    try {
+      let url = 'http://localhost:3000/api/producto';
+      if (categoriaNombre && categoriaNombre !== 'Ver todo') {
+        url = `http://localhost:3000/api/producto?categoria=${encodeURIComponent(categoriaNombre)}`; 
+      }
 
-    const handleCategoriaChange = (categoria_id) => {
-        setFiltros({ categoria_id });
-      };
+      console.log('URL de la solicitud:', url); // Depuración
 
-    const handleCartClick = () => {
-        console.log('Carrito clicked');
-    };
+      const response = await fetch(url, {
+        headers: {  
+          'Authorization': `Bearer ${token}`
+        }
+      });
+      const data = await response.json();
+      console.log('Respuesta del backend:', data); // Depuración
 
-    const handleAccountClick = () => {
-        console.log('Mi cuenta clicked');
-    };
+      if (response.ok) {
+        setProductosState(data);
+      } else {
+        console.error('Error al cargar los productos:', data.message);
+        setProductosState([]);
+      }
+    } catch (error) {
+      console.error('Error al consultar productos:', error);
+      setProductosState([]);
+    }
+  };
 
-    return (
-        <>
-            <BarraNavegacion
-                cartItemsCount={0}
-                onCartClick={handleCartClick}
-                onAccountClick={handleAccountClick}
+  const handleCategoriaChange = (categoriaNombre) => {
+    setFiltros({ categoria: categoriaNombre }); 
+  };
+
+  const handleAddProductClick = () => {
+    navigate('/nuevoProducto');
+  };
+
+  return (
+    <>
+      <BarraNavegacion />
+      <FiltroCategorias
+        activeCategoria={filtros.categoria} 
+        onCategoriaChange={handleCategoriaChange}
+      />
+      {usuario && usuario.tipo === 'Administrador' && (
+        <button id="btn-add-product" onClick={handleAddProductClick}>
+          Nuevo producto
+        </button>
+      )}
+      <div className="product-list">
+        {productosState.length > 0 ? (
+          productosState.map((producto) => (
+            <TarjetaProducto
+              key={producto.id}
+              image={producto.imagenes && producto.imagenes.length > 0 ? producto.imagenes[0] : 'default-image.jpg'}
+              name={producto.nombre}
+              price={producto.precio}
+              category={producto.categoria.nombre}
             />
-            <FiltroCategorias 
-                activeCategoria={filtros.categoria_id}
-                onCategoriaChange={handleCategoriaChange} 
-            />
-            <div className='product-list'>
-            {productosFiltrados.map((producto) => (
-                
-                <TarjetaProducto 
-                key={producto.id}
-                image={producto.imagenes[0]}
-                name={producto.nombre}
-                price={producto.precio}
-                category={producto.categoria_id}
-                />        
-            ))}
-            </div>
-        </>
-    );
+          ))
+        ) : (
+          <p>No hay productos disponibles.</p>
+        )}
+      </div>
+    </>
+  );
 }
