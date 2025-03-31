@@ -3,8 +3,11 @@ import './estilos/carrito.css';
 import productos from "../../mocks/productos.json";
 import { TarjetaProductoCart } from "./TarjetaProductoCart";
 import { useState, useEffect } from "react";
+import { ModalMensaje } from "../modalMensaje/modalMensaje";
 
 export function Carrito() {
+  const [modalQuitar, setModalQuitar] = useState(false);
+  const [modalComprar, setModalComprar] = useState(false);
   const [carrito, setCarrito] = useState(
     JSON.parse(localStorage.getItem("carrito")) || []
   );
@@ -32,13 +35,13 @@ export function Carrito() {
   const removerTodos = () => {
     localStorage.removeItem('carrito');
     window.dispatchEvent(new Event("storage"));
-    alert("Se han removido todos los productos del carrito");
+    setModalQuitar(true);
   }
 
   const comprar = () => {
     localStorage.removeItem('carrito');
     window.dispatchEvent(new Event("storage"));
-    alert("Compra realizada con éxito");
+    setModalComprar(true);
   }
 
   return (
@@ -92,6 +95,18 @@ export function Carrito() {
           </div>
         ) : ( "")}
       </div>
+
+      <ModalMensaje 
+          isOpen={modalQuitar} 
+          onClose={() => setModalQuitar(false)} 
+          mensaje="Se han removido todos los productos del carrito" 
+      />
+
+      <ModalMensaje 
+          isOpen={modalComprar} 
+          onClose={() => setModalComprar(false)} 
+          mensaje="Compra realizada con éxito" 
+      />
     </div>
   );
 }

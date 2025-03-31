@@ -5,8 +5,10 @@ import './productoInfoStyles.css';
 import { TarjetaProducto } from '../catalogoProductos/TarjetaProducto';
 import { useState, useRef, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { ModalMensaje } from "../modalMensaje/modalMensaje";
 
 export function ProductoInfo() {
+    const [modalAbierto, setModalAbierto] = useState(false);
     const { id } = useParams();
     const navigate = useNavigate();
     const producto = productos.find(p => p.id == id);
@@ -34,7 +36,11 @@ export function ProductoInfo() {
         return array;
     };
     
-    const productosAleatorios = shuffleArray([...productos]).slice(0, 5);
+    const [productosAleatorios, setProductosAleatorios] = useState([]);
+
+    useEffect(() => {
+        setProductosAleatorios(shuffleArray([...productos]).slice(0, 5));
+    }, [id]);
 
     const [colorName, setColorName] = useState("Rojo Oscuro");
 
@@ -67,7 +73,7 @@ export function ProductoInfo() {
         
         window.dispatchEvent(new Event("storage"));
     
-        alert("Producto agregado al carrito");
+        setModalAbierto(true);
     };
 
     return  (
@@ -123,6 +129,12 @@ export function ProductoInfo() {
                     ))}
                 </div>
             </div>
+
+            <ModalMensaje 
+                isOpen={modalAbierto} 
+                onClose={() => setModalAbierto(false)} 
+                mensaje="Producto agregado al carrito" 
+            />
         </div>
     );
 }

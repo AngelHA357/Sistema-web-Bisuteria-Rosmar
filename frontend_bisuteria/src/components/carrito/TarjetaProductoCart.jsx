@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from "react";
 import "./estilos/tarjetaProductoCart.css";
+import { ModalMensaje } from "../modalMensaje/modalMensaje";
 
 export function TarjetaProductoCart({ producto, cantidad }) {
+  const [modalAbierto, setModalAbierto] = useState(false);
   const categorias = {
     1: "Collares",
     2: "Aretes",
@@ -10,16 +12,16 @@ export function TarjetaProductoCart({ producto, cantidad }) {
   };
 
   const removerProducto = () => {
-    const carritoGuardado = JSON.parse(localStorage.getItem("carrito")) || [];
-    
-    const nuevoCarrito = carritoGuardado.filter((item) => item.id != producto.id);
-    
-    localStorage.setItem("carrito", JSON.stringify(nuevoCarrito));
-  
-    window.dispatchEvent(new Event("storage"));
+    setModalAbierto(true);
 
-    alert("Producto removido del carrito");
-  };
+    setTimeout(() => {
+        const carritoGuardado = JSON.parse(localStorage.getItem("carrito")) || [];
+        const nuevoCarrito = carritoGuardado.filter((item) => item.id != producto.id);
+        localStorage.setItem("carrito", JSON.stringify(nuevoCarrito));
+        
+        window.dispatchEvent(new Event("storage"));
+    }, 1000);
+};
 
   return (
     <div className="producto-card-cart">
@@ -32,6 +34,12 @@ export function TarjetaProductoCart({ producto, cantidad }) {
         </div>
       </div>
       <p className="remover" onClick={removerProducto}>Remover</p>
+      
+      <ModalMensaje 
+          isOpen={modalAbierto} 
+          onClose={() => setModalAbierto(false)} 
+          mensaje="Producto removido del carrito" 
+      />
     </div>
   );
 }
