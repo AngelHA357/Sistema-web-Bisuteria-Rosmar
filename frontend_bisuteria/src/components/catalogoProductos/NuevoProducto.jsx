@@ -115,8 +115,9 @@ export function NuevoProducto() {
   };
 
   return (
+    <>
+    <BarraNavegacion />
     <div className="nuevo-producto-container">
-      <BarraNavegacion />
       <h2>Nuevo producto</h2>
       <form className="nuevo-producto-form" onSubmit={handleSubmit}>
         <div className="form-group">
@@ -167,11 +168,10 @@ export function NuevoProducto() {
         <div className="form-group">
           <label>Colores:</label>
           <input
-            type="text"
+            type="color"
             name="colores"
             value={formData.colores}
             onChange={handleChange}
-            placeholder='["#FF0000","#00FF00"]'
           />
         </div>
         <div className="form-group">
@@ -195,5 +195,6 @@ export function NuevoProducto() {
       </form>
       {mensaje && <p className="mensaje">{mensaje}</p>}
     </div>
+    </>
   );
 }
