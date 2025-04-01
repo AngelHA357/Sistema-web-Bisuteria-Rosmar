@@ -29,6 +29,27 @@ const validateWithZod = (schema: z.ZodSchema) => {
     }
   };
 };
+const validateWithZodQuery = (schema: z.ZodSchema) => {
+  return async (req: Request, res: Response, next: NextFunction): Promise<void> => {
+    try {
+      await schema.parseAsync(req.query);
+      next();
+    } catch (error) {
+      if (error instanceof ZodError) {
+        res.status(422).json({
+          error: 'Validation error',
+          details: error.errors
+        });
+        return;
+      }
+      res.status(500).json({
+        error: 'Internal server error',
+        message: error instanceof Error ? error.message : 'Unknown error'
+      });
+      return;
+    }
+  };
+};
 
 // Middleware personalizado que procesa los campos de form-data pero no los archivos todavía
 const validateAndUpload = (
@@ -84,5 +105,6 @@ const validateAndUpload = (
 
 export {
   validateWithZod,
-  validateAndUpload
+  validateAndUpload,
+  validateWithZodQuery
 };

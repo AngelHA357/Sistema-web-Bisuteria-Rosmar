@@ -22,14 +22,6 @@ export class Producto{
   descripcion: string;
 
   @Column({
-    length:50,
-    type:"varchar",
-    array:true,
-    nullable:true
-  })
-  colores: string[];
-
-  @Column({
       type:"float",
       nullable:false
     })

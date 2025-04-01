@@ -1,9 +1,9 @@
 # Pasos para la configuracion del back
- 1. 'npm install -g typescript' para instalar typescript, en caso de no tenerlo.
+ 1. 'npm install -g typescript ts-node' para instalar typescript y el ejecutador de typescript, en caso de no tenerlo.
  2. 'cd .\Backend\' para posicionarse en la carpeta del backend.
  3. 'npm install' para instalar todas las dependencias del proyecto.
  4. Crear el archivo .env con las variables de entorno (Se explica abajo cuales son).
- 5. "ts-node .\src\config\mapeo.ts": para mapear la base de datos.
+ 5. "npm run mapeo": para mapear la base de datos.
  6. "npm run dev": Para ejecutar el servidor.
  7. Disfrutar y ser feliz.
 
