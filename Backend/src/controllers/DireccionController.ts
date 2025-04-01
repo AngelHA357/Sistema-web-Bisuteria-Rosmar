@@ -3,6 +3,8 @@ import { ServiceError } from "../error/ServiceError";
 import { DireccionService } from "../services/DireccionService";
 import { DireccionCreateDTO, DireccionUpdateDTO } from "../domain/direccion/direccion.dto";
 import { DireccionMap } from "../domain/direccion/direccion.mapper";
+import { findCodigoPostal, getColonias, getEstados, getMunicipios } from "../utils/dipomex";
+import { log } from "node:console";
 
 
 const direccionService = new DireccionService();
@@ -15,7 +17,7 @@ async function getDireccion(req: Request, res: Response) {
     if (error instanceof ServiceError) {
       res.status(400).send({ message: error.mensaje });
     } else {
-      res.status(400).send({ message: "Error al consultar la dirección" });
+      res.status(400).send({ message: "Error al ii consultar la dirección" });
     }
   }
 }
@@ -80,10 +82,40 @@ async function deleteDireccion(req: Request, res: Response): Promise<void>{
   }
 }
 
+async function getCodigoPostal(req: Request, res: Response){
+  const cp = req.query.cp as string;
+  const data = await findCodigoPostal(cp);
+  res.status(200).json(data);
+}
+async function getEstado(req: Request, res: Response){
+  console.log("procesando")
+  const data = await getEstados();
+
+  res.status(200).json(data);
+}
+async function getMunicipio(req: Request, res: Response){
+  const idEstado = req.query.id_estado as string;
+  const data = await getMunicipios(idEstado);
+
+  res.status(200).json(data);
+}
+async function getColonia(req: Request, res: Response){
+  const idEstado = req.query.id_estado as string;
+  const idMunicipio = req.query.id_mun as string;
+  const data = await getColonias(idEstado,idMunicipio);
+
+  res.status(200).json(data);
+}
+
+
 export {
   getDireccion,
   getDireccionesCliente,
   updateDireccion,
   registerDireccion,
-  deleteDireccion
+  deleteDireccion,
+  getCodigoPostal,
+  getEstado,
+  getMunicipio,
+  getColonia
 }

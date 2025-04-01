@@ -11,7 +11,6 @@ export class ProductoMap{
       nombre: entity.nombre,
       descripcion: entity.descripcion,
       precio: entity.precio,
-      colores: entity.colores.slice(),
       imagenes: entity.imagenes.slice(),
       categoria: CategoriaMapper.ToDTO(entity.categoria),
     }
@@ -25,7 +24,6 @@ export class ProductoMap{
     entity.categoria = new Categoria();
     entity.categoria.id = dto.categoria;
     entity.imagenes = dto.imagenes.map(img => `http://localhost:3000/img/productos/${img}`);
-    entity.colores = dto.colores.slice();
     return entity
   }
 
@@ -39,7 +37,6 @@ export class ProductoMap{
     entity.categoria = new Categoria();
     entity.categoria.id = dto.categoria;
     entity.imagenes = dto.imagenes.slice();
-    entity.colores = dto.colores.slice();
     return entity
   }
 
