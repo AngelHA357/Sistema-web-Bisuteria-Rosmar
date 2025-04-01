@@ -115,7 +115,6 @@ export function NuevoProducto() {
     formDataToSend.append('descripcion', formData.descripcion);
     formDataToSend.append('precio', parseFloat(formData.precio));
     formDataToSend.append('categoria', parseInt(formData.categoria));
-    formDataToSend.append('colores', JSON.stringify(['#000000']));
     formData.imagenes.forEach((file) => {
       formDataToSend.append('files', file);
     });
