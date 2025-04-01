@@ -4,4 +4,4 @@ export function BotonConfirmar({ textoBoton, onClick }) {
         {textoBoton}
       </button>
     );
-  }
+  } 

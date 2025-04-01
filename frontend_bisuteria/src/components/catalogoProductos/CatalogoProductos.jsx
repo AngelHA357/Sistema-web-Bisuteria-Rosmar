@@ -74,6 +74,12 @@ export function CatalogoProductos() {
       return;
     }
 
+    const nombreRegex = /^[a-zA-Z0-9\s]{5,}$/;
+    if (!nombreRegex.test(nuevaCategoria)) {
+      alert('El nombre de la categoría debe tener más de 4 caracteres y solo puede contener letras, números y espacios');
+      return;
+    }
+
     try {
       const body = {
         nombre: nuevaCategoria
