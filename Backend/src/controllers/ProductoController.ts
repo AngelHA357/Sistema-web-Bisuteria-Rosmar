@@ -61,7 +61,6 @@ async function createProducto(req: Request, res) {
 function parseProductoFormData(data, images: Express.Multer.File[]): ProductoCreateDTO {
     const fileNames = images.map(img => img.filename)
     let producto: ProductoCreateDTO = {
-        colores: JSON.parse(data.colores),
         precio: JSON.parse(data.precio),
         categoria: JSON.parse(data.categoria),
         descripcion: data.descripcion,

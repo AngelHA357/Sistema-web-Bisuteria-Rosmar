@@ -11,7 +11,6 @@ export class ProductoMap{
       nombre: entity.nombre,
       descripcion: entity.descripcion,
       precio: entity.precio,
-      colores: entity.colores.slice(),
       imagenes: entity.imagenes.slice(),
       categoria: CategoriaMapper.ToDTO(entity.categoria),
     }
@@ -25,9 +24,11 @@ export class ProductoMap{
     entity.categoria = new Categoria();
     entity.categoria.id = dto.categoria;
     entity.imagenes = dto.imagenes.map(img => `http://localhost:3000/img/productos/${img}`);
-    entity.colores = dto.colores.slice();
     return entity
   }
+
+
+  //Esto es solo usable para la insersion masiva.
   static ToEntityFromInsercion(dto: ProductoCreateDTO): Producto{
     let entity = new Producto();
     entity.nombre = dto.nombre;
@@ -36,7 +37,6 @@ export class ProductoMap{
     entity.categoria = new Categoria();
     entity.categoria.id = dto.categoria;
     entity.imagenes = dto.imagenes.slice();
-    entity.colores = dto.colores.slice();
     return entity
   }
 

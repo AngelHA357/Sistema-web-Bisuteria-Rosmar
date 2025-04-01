@@ -3,14 +3,14 @@ import { Direccion } from "./Direccion";
 import { PedidoProducto } from "./PedidoProducto";
 import { Cliente } from "./Cliente";
 
-enum TipoPedido{
+export enum TipoPedido{
   PENDIENTE="Pendiente",
   ENVIADO="Enviado",
   RECHAZADO="Rechazado",
   ENTREGADO="Entregado"
 }
 
-enum MetodoPago{
+export enum MetodoPago{
   EFECTIVO="Efectivo",
   TRANSFERENCIA="Transferencia",
 }
