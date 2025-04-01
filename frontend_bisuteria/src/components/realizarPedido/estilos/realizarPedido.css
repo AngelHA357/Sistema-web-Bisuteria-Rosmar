@@ -4,6 +4,14 @@ body{
   margin: 0;
 }
 
+.realizar-pedido-page {
+  background-color: white;
+  min-height: 100vh;
+  padding: 0;
+  margin: 0;
+  font-family: 'Arial', sans-serif;
+}
+
 .realizar-pedido-container {
   display: flex;
   flex-direction: column;

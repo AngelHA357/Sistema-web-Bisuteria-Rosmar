@@ -64,6 +64,10 @@ export function CatalogoProductos() {
     navigate('/nuevoProducto');
   };
 
+  const handleRealizarPedido = () => {
+    navigate('/realizarPedido');
+  };
+
   const handleAddCategoryClick = () => {
     setShowInput(!showInput);
   };
@@ -135,6 +139,11 @@ export function CatalogoProductos() {
         {usuario && usuario.tipo === 'Administrador' && (
           <button id="btn-add-product" onClick={handleAddProductClick}>
             Nuevo producto
+          </button>
+        )}
+        {usuario && usuario.tipo === 'Administrador' && (
+          <button id="btn-add-product" onClick={handleRealizarPedido}>
+            Realizar pedido
           </button>
         )}
         <div className="product-list">
