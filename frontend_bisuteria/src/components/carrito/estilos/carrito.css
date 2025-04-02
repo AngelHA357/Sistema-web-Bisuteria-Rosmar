@@ -1,0 +1,88 @@
+.carrito-container {
+  max-width: 100%;
+  margin: 0 10% 5%;
+  text-align: left;
+  cursor: default;
+}
+
+.carrito-container h2{
+  font-size: 3em;
+  margin: 2% 0 0;
+}
+
+.remover-todos{
+  cursor: pointer;
+  color: #a49a88;
+}
+
+.remover-todos:hover {
+  text-decoration: underline;
+}
+
+.carrito-header{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  text-align: left;
+  font-weight: bold;
+  font-size: 1.3em;
+}
+
+.carrito-content {
+  display: flex;
+  justify-content: space-between;
+  gap: 10%;
+}
+
+.productos-lista {
+  flex: 2;
+}
+
+/* Resumen de compras */
+.resumen-compras {
+  flex: 1;
+  padding: 15px;
+  border-radius: 8px;
+}
+
+.resumen-compras h3 {
+  margin-top: 0;
+  font-size: 2em;
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.resumen-compras p {
+  display: flex;
+  justify-content: space-between;
+  font-size: 1.2em;
+  margin: 20px 0;
+}
+
+.resumen-compras .total {
+  font-weight: bold;
+  font-size: 1.2em;
+}
+
+.continuar-compra {
+  width: 50%;
+  padding: 15px 15px;
+  background: #a58d6f;
+  color: white;
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
+  font-size: 1.5em;
+  margin: 30px calc(50% - 25%);
+  transition: 0.5s;
+  font-family: "Gidole", sans-serif;
+}
+
+.continuar-compra:hover {
+  background: rgb(132, 113, 89);
+}
+
+.continuar-compra:disabled {
+  background: #ccc;
+  cursor: not-allowed;
+}

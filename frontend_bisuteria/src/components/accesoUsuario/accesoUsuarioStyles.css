@@ -1,8 +1,17 @@
+@import url('https://fonts.googleapis.com/css2?family=Gidole&display=swap');
+
 /* Estilos generales */
 body {
     background-color: #f3e9dd;
-    font-family: Arial, sans-serif;
+    font-family: "Gidole", sans-serif;
     text-align: center;
+    height: 100vh;
+}
+
+#root{
+    height: 100%;
+    display: flex;
+    flex-direction: column;
 }
 
 /* Contenedor principal */
@@ -12,6 +21,7 @@ body {
     align-items: center;
     justify-content: center;
     height: 100vh;
+    background-color: #f3e9dd;
 }
 
 /* Logo */
@@ -69,6 +79,7 @@ body {
     border-radius: 5px;
     width: 100%;
     font-size: 14px;
+    font-family: "Gidole", sans-serif;
 }
 
 /* Botón de confirmación */
@@ -83,6 +94,7 @@ body {
     font-size: 16px;
     font-weight: bold;
     margin-top: 10px;
+    font-family: "Gidole", sans-serif;
 }
 
 .boton-confirmar:hover {
