@@ -1,53 +1,108 @@
+body{
+  background-color: white;
+}
+
 .nuevo-producto-container {
-    max-width: 600px;
-    margin: 0 auto;
-    padding: 20px;
-  }
-  
-  .nuevo-producto-form {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-  }
-  
-  .form-group {
-    display: flex;
-    flex-direction: column;
-    gap: 5px;
-  }
-  
-  .form-group label {
-    font-size: 16px;
-    font-weight: bold;
-  }
-  
-  .form-group input,
-  .form-group select,
-  .form-group textarea {
-    padding: 10px;
-    font-size: 14px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-  }
-  
-  .form-group textarea {
-    min-height: 100px;
-    resize: vertical;
-  }
-  
-  .imagenes-lista {
-    list-style: none;
-    padding: 0;
-    margin: 10px 0 0 0;
-  }
-  
-  .imagenes-lista li {
-    font-size: 14px;
-    color: #555;
-  }
-  
-  .mensaje {
-    margin-top: 15px;
-    font-size: 14px;
-    color: #333;
-  }
+  max-width: 700px;
+  margin: 100px auto 40px auto;
+  padding: 30px;
+  background-color: #fff;
+  border-radius: 15px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}
+
+.nuevo-producto-container h2 {
+  font-size: 24px;
+  color: #333;
+  text-align: center;
+  margin-bottom: 30px;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.nuevo-producto-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.form-group label {
+  font-size: 16px;
+  font-weight: 500;
+  color: #4a4a4a;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+  padding: 12px 15px;
+  font-size: 15px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  background-color: #f9f9f9;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+  outline: none;
+  border-color: #8e6f4e;
+  box-shadow: 0 0 5px rgba(142, 111, 78, 0.3);
+}
+
+.form-group textarea {
+  min-height: 120px;
+  resize: vertical;
+}
+
+.form-group input[type="file"] {
+  padding: 8px 0;
+  border: none;
+  background-color: transparent;
+}
+
+.form-group input[type="file"]::-webkit-file-upload-button {
+  padding: 10px 20px;
+  background-color: #e0d4c5;
+  border: 1px solid #8e6f4e;
+  border-radius: 8px;
+  color: #4a4a4a;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.form-group input[type="file"]::-webkit-file-upload-button:hover {
+  background-color: #d2c5b4;
+}
+
+.imagenes-lista {
+  list-style: none;
+  padding: 0;
+  margin: 10px 0 0 0;
+}
+
+.imagenes-lista li {
+  font-size: 14px;
+  color: #666;
+  padding: 5px 0;
+  border-bottom: 1px solid #eee;
+}
+
+.mensaje {
+  margin-top: 20px;
+  font-size: 15px;
+  color: #8e6f4e;
+  text-align: center;
+  font-weight: 500;
+  padding: 10px;
+  border-radius: 8px;
+  background-color: #f5e9dc;
+}

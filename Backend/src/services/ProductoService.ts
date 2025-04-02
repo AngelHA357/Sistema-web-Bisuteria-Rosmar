@@ -54,8 +54,6 @@ export class ProductoService{
      }
     })
 
-    console.log(productos);
-
     if(!productos){
       throw new ServiceError("No existen productos en la categoria")
     }

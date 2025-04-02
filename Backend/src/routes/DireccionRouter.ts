@@ -1,7 +1,7 @@
 import { Router } from 'express';
-import { deleteDireccion, getDireccion, getDireccionesCliente, registerDireccion, updateDireccion } from '../controllers/DireccionController';
-import { validateWithZod } from '../middlewares/validation';
-import { DireccionCreateSchema, DireccionUpdateSchema } from '../domain/direccion/direccion.schema';
+import { deleteDireccion, getCodigoPostal, getColonia, getDireccion, getEstado, getMunicipio, registerDireccion, updateDireccion } from '../controllers/DireccionController';
+import { validateWithZod, validateWithZodQuery } from '../middlewares/validation';
+import { DireccionCreateSchema, DireccionUpdateSchema, QueryColonia, QueryCP, QueryMunicipio } from '../domain/direccion/direccion.schema';
 
 export class DireccionRouter {
   public router: Router;
@@ -12,6 +12,11 @@ export class DireccionRouter {
   }
 
   private inicializeRoutes() {
+    this.router.get('/codigo_postal',validateWithZodQuery(QueryCP),getCodigoPostal);
+    this.router.get('/estados',getEstado);
+    this.router.get('/municipio',validateWithZodQuery(QueryMunicipio),getMunicipio);
+    this.router.get('/colonia',validateWithZodQuery(QueryColonia),getColonia);
+    
     this.router.get('/:id', getDireccion);
     this.router.post('/', validateWithZod(DireccionCreateSchema), registerDireccion);
     this.router.put('/:id', validateWithZod(DireccionUpdateSchema), updateDireccion);

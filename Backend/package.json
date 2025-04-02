@@ -5,6 +5,7 @@
   "scripts": {
     "start": "node dist/server.js",
     "dev": "nodemon src/server.ts",
+    "mapeo": "ts-node ./src/config/mapeo.ts",
     "build": "tsc"
   },
   "keywords": [],

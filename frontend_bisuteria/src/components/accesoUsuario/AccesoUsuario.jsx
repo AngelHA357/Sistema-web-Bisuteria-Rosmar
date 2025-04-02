@@ -1,8 +1,7 @@
 import logoBisuteria from '/imgs/logo_bisuteria_acceso_usuario.png';
 import { CampoDato } from './CampoDato';
 import { BarraOpciones } from './BarraOpciones';
-import { BotonConfirmar } from './botonConfirmar';
-import { CatalogoProductos } from '../catalogoProductos/CatalogoProductos';
+import { BotonConfirmar } from './BotonConfirmar';
 import './accesoUsuarioStyles.css';
 import { UserContext } from '../../context/UserContext';
 import React, { useState, useEffect, useContext } from 'react';
@@ -23,12 +22,26 @@ export function AccesoUsuario() {
   });
   const [mensaje, setMensaje] = useState('');
 
+  // Resetear formulario y mensaje al cambiar de modo
+  const cambiarModo = (nuevoModo) => {
+    setModoAcceso(nuevoModo);
+    setFormData({
+      email: '',
+      password: '',
+      name: '',
+      lastName1: '',
+      lastName2: '',
+      confirmPassword: ''
+    });
+    setMensaje('');
+  };
+
   const handleChange = (e) => {
     setFormData({
       ...formData,
       [e.target.name]: e.target.value
     });
-  }
+  };
 
   const camposAMostrar = () => {
     if (modoAcceso === 'login') {
@@ -98,12 +111,27 @@ export function AccesoUsuario() {
         </>
       );
     }
-
-
-  }
+  };
 
   const agregarUsuario = async () => {
     if (modoAcceso !== 'register') return;
+
+    if (!formData.email || !formData.password || !formData.name || !formData.lastName1 || !formData.confirmPassword) {
+      setMensaje('Llene todos los campos');
+      return;
+    }
+
+    const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+    if (!emailRegex.test(formData.email)) {
+      setMensaje('El correo electrónico debe tener un formato válido (ejemplo: usuario@dominio.com)');
+      return;
+    }
+
+    const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&-_])[A-Za-z\d@$!%*?&-_]{8,}$/;
+    if (!passwordRegex.test(formData.password)) {
+      setMensaje('La contraseña debe tener un carácter especial, una mayúscula, una minúscula y un número por lo menos, y una longitud mínima de 8 caracteres');
+      return;
+    }
 
     if (formData.password !== formData.confirmPassword) {
       setMensaje('Las contraseñas no coinciden');
@@ -132,7 +160,15 @@ export function AccesoUsuario() {
 
       if (response.ok) {
         setMensaje('Usuario registrado con éxito');
-        setFormData({ email: '', password: '', name: '', lastName: '', confirmPassword: '' });
+        setFormData({
+          email: '',
+          password: '',
+          name: '',
+          lastName1: '',
+          lastName2: '',
+          confirmPassword: ''
+        });
+        setModoAcceso('login');
       } else {
         setMensaje(data.message || 'Error al registrar el usuario');
       }
@@ -144,6 +180,11 @@ export function AccesoUsuario() {
 
   const verificarLogin = async () => {
     if (modoAcceso !== 'login') return;
+
+    if (!formData.email || !formData.password) {
+      setMensaje('Llene todos los campos');
+      return;
+    }
 
     const credenciales = {
       correo: formData.email,
@@ -160,7 +201,6 @@ export function AccesoUsuario() {
       });
 
       const data = await response.json();
-      console.log('Respuesta del backend en login:', data);
 
       if (response.ok) {
         const token = data.token;
@@ -169,17 +209,13 @@ export function AccesoUsuario() {
           return;
         }
 
-        // Decodificar el token para obtener los datos del usuario
         const usuario = jwtDecode(token);
-        console.log('Usuario decodificado del token:', usuario);
-
         setToken(token);
         setUsuario(usuario);
         localStorage.setItem('usuarioLogueado', JSON.stringify(usuario));
         setMensaje('Inicio de sesión exitoso');
         navigate('/catalogo');
-
-      } else {  
+      } else {
         setMensaje(data.message || 'Correo o contraseña incorrectos');
       }
     } catch (error) {
@@ -203,7 +239,7 @@ export function AccesoUsuario() {
       <div className="formulario">
         <BarraOpciones
           modo={modoAcceso}
-          setModo={setModoAcceso}
+          setModo={cambiarModo} // Usar la nueva función para cambiar modo
         />
         {camposAMostrar()}
         <BotonConfirmar
@@ -214,5 +250,4 @@ export function AccesoUsuario() {
       </div>
     </div>
   );
-
 }
