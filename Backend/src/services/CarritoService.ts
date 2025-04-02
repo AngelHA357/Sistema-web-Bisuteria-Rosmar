@@ -73,7 +73,9 @@ export class CarritoService{
   async showCarrito(idCliente: number): Promise<Carrito[]>{
     const entities = await this.carritoRepository.find({
       relations: {
-        producto: true
+        producto: {
+          categoria: true,
+        }
       },
       where: {
         cliente: {
@@ -94,6 +96,7 @@ export class CarritoService{
     entity.cantidad += 1;
     return await this.carritoRepository.save(entity); 
   }
+
   async decrementProducto(idCliente: number, idProducto: number): Promise<Carrito>{
     
     const entity = await this.existProductoEnCarrito(idCliente, idProducto);
@@ -101,7 +104,7 @@ export class CarritoService{
     if(!entity){
       throw new ServiceError("No existe ese producto asociado al cliente");
     }
-    entity.cantidad -= 1;
+    entity.cantidad = 0;
     if(entity.cantidad === 0){
       return this.deleteProductoForReach0(entity);
     }

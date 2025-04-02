@@ -7,7 +7,8 @@ export function FiltroCategorias({activeCategoria, onCategoriaChange}) {
     { id: 1, nombre: 'Collares' },
     { id: 2, nombre: 'Aretes' },
     { id: 3, nombre: 'Pulseras' },
-    { id: 4, nombre: 'Otros' },
+    { id: 4, nombre: 'Plumas' },
+    { id: 5, nombre: 'Otros' },
   ];
 
   return (

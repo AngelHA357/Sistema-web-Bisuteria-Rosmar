@@ -1,6 +1,5 @@
 import React from 'react';
 import { useParams } from 'react-router-dom';
-import productos from '../../mocks/productos.json';
 import './productoInfoStyles.css';
 import { TarjetaProducto } from '../catalogoProductos/TarjetaProducto';
 import { useState, useRef, useEffect } from 'react';
@@ -9,24 +8,14 @@ import { ModalMensaje } from "../modalMensaje/modalMensaje";
 
 export function ProductoInfo() {
     const [modalAbierto, setModalAbierto] = useState(false);
+    const [producto, setProducto] = useState(null);
+    const [productosAleatorios, setProductosAleatorios] = useState([]);
+    const [colorName, setColorName] = useState("Rojo Oscuro");
     const { id } = useParams();
+    const usuario = 6; // CAMBIAR ESTO POR EL ID DEL USUARIO LOGUEADO
     const navigate = useNavigate();
-    const producto = productos.find(p => p.id == id);
-    const categorias = {
-        1: "Collares",
-        2: "Aretes",
-        3: "Pulseras",
-        4: "Otros",
-      };
-
-    useEffect(() => {
-        setColorName("Rojo Oscuro");
-        if (inputRef.current) {
-            inputRef.current.value = 1;
-        }
-    }, [id]);
-
-    if (!producto) return <h1>Producto no encontrado</h1>;
+    const inputRef = useRef(null);
+    const apiUrl = import.meta.env.VITE_BACK_URL;
 
     const shuffleArray = (array) => {
         for (let i = array.length - 1; i > 0; i--) {
@@ -35,20 +24,48 @@ export function ProductoInfo() {
         }
         return array;
     };
-    
-    const [productosAleatorios, setProductosAleatorios] = useState([]);
 
     useEffect(() => {
-        setProductosAleatorios(shuffleArray([...productos]).slice(0, 5));
-    }, [id]);
+        const fetchProducto = async () => {
+            try {
+                const response = await fetch(`${apiUrl}/producto/${id}`);
+                if (!response.ok) {
+                    throw new Error('Producto no encontrado');
+                }
+                const data = await response.json();
+                setProducto(data);
+            } catch (error) {
+                console.error(error);
+            }
+        };
+        
+        const fetchProductosRelacionados = async () => {
+            try {
+                const response = await fetch(`${apiUrl}/producto`);
+                if (!response.ok) {
+                    throw new Error('Error al obtener productos relacionados');
+                }
+                const data = await response.json();
+                setProductosAleatorios(shuffleArray([...data]).slice(0, 5));
+            } catch (error) {
+                console.error(error);
+            }
+        };
 
-    const [colorName, setColorName] = useState("Rojo Oscuro");
+        fetchProducto();
+        fetchProductosRelacionados();
+        setColorName("Rojo Oscuro");
+        if (inputRef.current) {
+            inputRef.current.value = 1;
+        }
+    }, [id, apiUrl]);
+
+    if (!producto) return <h1>Producto no encontrado</h1>;
 
     const changeColor = (name) => {
         setColorName(name);
     };
 
-    const inputRef = useRef(null);
     const handleClick = () => {
         inputRef.current.focus();
     };
@@ -57,28 +74,31 @@ export function ProductoInfo() {
         navigate(`/catalogo`);
     };
 
-    const agregarCarrito = () => {
-        const carrito = JSON.parse(localStorage.getItem('carrito')) || [];
-        const cantidad = document.querySelector('.cantidad-input').value;
-
-        const productoExistente = carrito.find(producto => producto.id == id);
+    const agregarCarrito = async () => {
+        try {
+            const cantidad = document.querySelector('.cantidad-input').value;
+            const response = await fetch(`${import.meta.env.VITE_BACK_URL}/carrito`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ idCliente: usuario, idProducto: id, cantidad: Number(cantidad) })
+            });
     
-        if (productoExistente) {
-            productoExistente.cantidad = Number(productoExistente.cantidad) + Number(cantidad);
-        } else {
-            carrito.push({ id, cantidad });
+            if (!response.ok) {
+                throw new Error('Error al agregar producto al carrito');
+            }
+    
+            window.dispatchEvent(new Event("storage"));
+            setModalAbierto(true);
+        } catch (error) {
+            console.error(error);
         }
-    
-        localStorage.setItem('carrito', JSON.stringify(carrito));
-        
-        window.dispatchEvent(new Event("storage"));
-    
-        setModalAbierto(true);
-    };
+    };    
 
     return  (
         <div className="producto-container">
-            <p className="breadcrumb"> <a onClick={ regresar }>🡠 Tipo / </a>{categorias[producto.categoria_id] || "Desconocido"}</p>
+            <p className="breadcrumb"> <a onClick={ regresar }>🡠 Tipo / </a>{producto.categoria.nombre || "Desconocido"}</p>
 
             <div className="producto-detalle">
                 <img src={producto.imagenes[1]} alt={producto.nombre} className="producto-imagen" />
@@ -87,14 +107,14 @@ export function ProductoInfo() {
                     <h1 className="producto-nombre">{producto.nombre}</h1>
                     <p className="producto-precio">${producto.precio} MXN</p>
 
-                    <div className="producto-colores">
+                    {/* <div className="producto-colores">
                         <div className="colores">
                             <span className="color-opcion" style={{ backgroundColor: "#3B0E0E" }} onClick={() => changeColor("Rojo Oscuro")}></span>
                             <span className="color-opcion" style={{ backgroundColor: "#0E3B0E" }} onClick={() => changeColor("Verde Oscuro")}></span>
                             <span className="color-opcion" style={{ backgroundColor: "#3B3B8F" }} onClick={() => changeColor("Azul Métalico")}></span>
                         </div>
                         <p>Color: {colorName}</p>
-                    </div>
+                    </div> */}
 
                     <div className="producto-compra">
                         <p onClick={handleClick}>Cantidad</p>
@@ -106,12 +126,13 @@ export function ProductoInfo() {
 
             <div className="producto-descripcion">
                 <h2>Detalles del producto</h2>
-                <ul>
+                <p>{producto.descripcion}</p>
+                {/* <ul>
                     <li>Pulsera temática de One Piece</li>
                     <li>Acero inoxidable</li>
                     <li>Transpirable</li>
                     <li>Con ubicación GPS</li>
-                </ul>
+                </ul> */}
             </div>
 
             <div className='productos-relacionados'>
@@ -124,7 +145,7 @@ export function ProductoInfo() {
                         image={producto.imagenes[0]}
                         name={producto.nombre}
                         price={producto.precio}
-                        category={producto.categoria_id}
+                        category={producto.categoria.nombre}
                         />        
                     ))}
                 </div>

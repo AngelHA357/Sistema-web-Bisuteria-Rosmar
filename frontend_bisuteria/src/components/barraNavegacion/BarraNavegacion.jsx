@@ -7,6 +7,7 @@ import { useNavigate } from 'react-router-dom';
 import { useState, useEffect} from 'react';
 
 export function BarraNavegacion() {
+    const id = 6; // CAMBIAR ESTO POR EL ID DEL USUARIO LOGUEADO
     const navigate = useNavigate();
     const handleClick = () => {
       navigate(`/catalogo`);
@@ -14,18 +15,32 @@ export function BarraNavegacion() {
 
     const [cartItemsCount, setCartItemsCount] = useState(0);
 
-    const getCartItemsCount = () => {
-      const carrito = JSON.parse(localStorage.getItem('carrito')) || [];
-      return carrito.length;
+    const getCartItemsCount = async () => {
+      try {
+          const response = await fetch(`${import.meta.env.VITE_BACK_URL}/cliente/${id}/carrito`);
+          if (!response.ok) {
+              throw new Error('Error al obtener el carrito');
+          }
+          const carrito = await response.json();
+          return carrito.listado.length;
+      } catch (error) {
+          console.error(error);
+          return 0;
+      }
     };
 
     useEffect(() => {
-      setCartItemsCount(getCartItemsCount());
+      const fetchCartCount = async () => {
+          const count = await getCartItemsCount();
+          setCartItemsCount(count);
+      };
+      fetchCartCount();
     }, []);
     
-    window.addEventListener('storage', () => {
-      setCartItemsCount(getCartItemsCount());
-    })
+    window.addEventListener('storage', async () => {
+      const count = await getCartItemsCount();
+      setCartItemsCount(count);
+    });
 
     const onCartClick = () => {
       navigate(`/carrito`);
