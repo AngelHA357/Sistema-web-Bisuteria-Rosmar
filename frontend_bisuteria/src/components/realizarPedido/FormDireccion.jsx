@@ -46,16 +46,15 @@ const FormularioDireccion = ({ onGuardar, onCancelar }) => {
     }, [datos]);
 
     const handleSubmit = (e) => {
+        console.log("Datos enviados:", formData)
         e.preventDefault()
-
-        const { isValid, errors } = validarDireccion(formData);
-
-        if (!isValid) {
+        const { isValido, errors } = validarDireccion(formData);
+        if (!isValido) {
            setErrors(errors);
            return;
+        }else {
+            onGuardar(formData)
         }
-
-        onGuardar(formData)
     }
 
     const validarDireccion = (formData) => {
