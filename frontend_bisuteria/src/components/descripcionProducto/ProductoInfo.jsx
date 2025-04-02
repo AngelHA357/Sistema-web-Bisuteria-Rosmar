@@ -1,21 +1,21 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import { useParams } from 'react-router-dom';
 import './productoInfoStyles.css';
 import { TarjetaProducto } from '../catalogoProductos/TarjetaProducto';
 import { useState, useRef, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { ModalMensaje } from "../modalMensaje/modalMensaje";
+import { UserContext } from '../../context/UserContext';
 
 export function ProductoInfo() {
+    const { usuario, token } = useContext(UserContext); 
     const [modalAbierto, setModalAbierto] = useState(false);
     const [producto, setProducto] = useState(null);
     const [productosAleatorios, setProductosAleatorios] = useState([]);
     const [colorName, setColorName] = useState("Rojo Oscuro");
     const { id } = useParams();
-    const usuario = 6; // CAMBIAR ESTO POR EL ID DEL USUARIO LOGUEADO
     const navigate = useNavigate();
     const inputRef = useRef(null);
-    const apiUrl = import.meta.env.VITE_BACK_URL;
 
     const shuffleArray = (array) => {
         for (let i = array.length - 1; i > 0; i--) {
@@ -28,7 +28,12 @@ export function ProductoInfo() {
     useEffect(() => {
         const fetchProducto = async () => {
             try {
-                const response = await fetch(`${apiUrl}/producto/${id}`);
+                // Add token to the request headers
+                const response = await fetch(`http://localhost:3000/api/producto/${encodeURIComponent(id)}`, {
+                    headers: {
+                        'Authorization': `Bearer ${token}`
+                    }
+                });
                 if (!response.ok) {
                     throw new Error('Producto no encontrado');
                 }
@@ -41,7 +46,12 @@ export function ProductoInfo() {
         
         const fetchProductosRelacionados = async () => {
             try {
-                const response = await fetch(`${apiUrl}/producto`);
+                // Add token to the request headers
+                const response = await fetch(`http://localhost:3000/api/producto`, {
+                    headers: {
+                        'Authorization': `Bearer ${token}`
+                    }
+                });
                 if (!response.ok) {
                     throw new Error('Error al obtener productos relacionados');
                 }
@@ -52,13 +62,18 @@ export function ProductoInfo() {
             }
         };
 
-        fetchProducto();
-        fetchProductosRelacionados();
+        if (token) {
+            fetchProducto();
+            fetchProductosRelacionados();
+        } else {
+            navigate('/'); 
+        }
+        
         setColorName("Rojo Oscuro");
         if (inputRef.current) {
             inputRef.current.value = 1;
         }
-    }, [id, apiUrl]);
+    }, [id, 'http://localhost:3000/api', token, navigate]);
 
     if (!producto) return <h1>Producto no encontrado</h1>;
 
@@ -77,12 +92,13 @@ export function ProductoInfo() {
     const agregarCarrito = async () => {
         try {
             const cantidad = document.querySelector('.cantidad-input').value;
-            const response = await fetch(`${import.meta.env.VITE_BACK_URL}/carrito`, {
+            const response = await fetch(`http://localhost:3000/api/carrito`, {
                 method: 'POST',
                 headers: {
-                    'Content-Type': 'application/json'
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}` // Add token here too
                 },
-                body: JSON.stringify({ idCliente: usuario, idProducto: id, cantidad: Number(cantidad) })
+                body: JSON.stringify({ idCliente: usuario.id, idProducto: id, cantidad: Number(cantidad) })
             });
     
             if (!response.ok) {
@@ -96,25 +112,16 @@ export function ProductoInfo() {
         }
     };    
 
-    return  (
+    return (
         <div className="producto-container">
             <p className="breadcrumb"> <a onClick={ regresar }>🡠 Tipo / </a>{producto.categoria.nombre || "Desconocido"}</p>
 
             <div className="producto-detalle">
-                <img src={producto.imagenes[1]} alt={producto.nombre} className="producto-imagen" />
+                <img src={producto.imagenes[1] || producto.imagenes[0]} alt={producto.nombre} className="producto-imagen" />
                 
                 <div className="producto-info">
                     <h1 className="producto-nombre">{producto.nombre}</h1>
                     <p className="producto-precio">${producto.precio} MXN</p>
-
-                    {/* <div className="producto-colores">
-                        <div className="colores">
-                            <span className="color-opcion" style={{ backgroundColor: "#3B0E0E" }} onClick={() => changeColor("Rojo Oscuro")}></span>
-                            <span className="color-opcion" style={{ backgroundColor: "#0E3B0E" }} onClick={() => changeColor("Verde Oscuro")}></span>
-                            <span className="color-opcion" style={{ backgroundColor: "#3B3B8F" }} onClick={() => changeColor("Azul Métalico")}></span>
-                        </div>
-                        <p>Color: {colorName}</p>
-                    </div> */}
 
                     <div className="producto-compra">
                         <p onClick={handleClick}>Cantidad</p>
@@ -127,12 +134,6 @@ export function ProductoInfo() {
             <div className="producto-descripcion">
                 <h2>Detalles del producto</h2>
                 <p>{producto.descripcion}</p>
-                {/* <ul>
-                    <li>Pulsera temática de One Piece</li>
-                    <li>Acero inoxidable</li>
-                    <li>Transpirable</li>
-                    <li>Con ubicación GPS</li>
-                </ul> */}
             </div>
 
             <div className='productos-relacionados'>
@@ -141,11 +142,12 @@ export function ProductoInfo() {
                 <div className='productos-relacionados-container'>
                     {productosAleatorios.map((producto) => (  
                         <TarjetaProducto 
-                        productId={producto.id}
-                        image={producto.imagenes[0]}
-                        name={producto.nombre}
-                        price={producto.precio}
-                        category={producto.categoria.nombre}
+                            key={producto.id}
+                            productId={producto.id}
+                            image={producto.imagenes && producto.imagenes.length > 0 ? producto.imagenes[0] : 'default-image.jpg'}
+                            name={producto.nombre}
+                            price={producto.precio}
+                            category={producto.categoria.nombre}
                         />        
                     ))}
                 </div>

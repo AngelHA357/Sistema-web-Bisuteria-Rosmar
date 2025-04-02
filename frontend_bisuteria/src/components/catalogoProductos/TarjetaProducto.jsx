@@ -3,6 +3,7 @@ import "./estilos/tarjetaProductoStyles.css";
 import { useNavigate } from 'react-router-dom';
 
 export function TarjetaProducto({ image, name, price, category, productId }) {
+  console.log("Product ID being passed:", productId);
   const navigate = useNavigate();
 
   const handleClick = () => {
