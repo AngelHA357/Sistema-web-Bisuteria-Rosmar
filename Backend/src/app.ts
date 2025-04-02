@@ -8,6 +8,7 @@ import { createFolder } from './config/ImageFolder';
 import { ClienteRouter } from './routes/ClienteRouter';
 import { DireccionRouter } from './routes/DireccionRouter';
 import { CarritoRouter } from './routes/CarritoRouter';
+import { PedidoRouter } from './routes/PedidoRouter';
 
 const app = express();
 
@@ -33,12 +34,14 @@ function initializeRoutes(): void {
   const clienteRoutes = new ClienteRouter();
   const direccionRoutes = new DireccionRouter();
   const carritoRoutes = new CarritoRouter();
+  const pedidoRoutes = new PedidoRouter();
 
   app.use('/api/categoria', categoriaRoutes.router);
   app.use('/api/producto', productoRoutes.router);
   app.use('/api/cliente', clienteRoutes.router);
   app.use('/api/direccion', direccionRoutes.router);
   app.use('/api/carrito', carritoRoutes.router);
+  app.use('/api/pedido', pedidoRoutes.router);
 }
 
 init();
