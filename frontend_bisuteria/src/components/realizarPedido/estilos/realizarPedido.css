@@ -1,0 +1,167 @@
+body{
+  background-color: white;
+  padding: 0;
+  margin: 0;
+}
+
+.realizar-pedido-page {
+  background-color: white;
+  min-height: 100vh;
+  padding: 0;
+  margin: 0;
+  font-family: 'Arial', sans-serif;
+}
+
+.realizar-pedido-container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+  font-family: Arial, sans-serif;
+}
+
+.titulo {
+  font-size: 2rem;
+  margin-bottom: 30px;
+  font-weight: 800;
+  text-align: left;
+}
+
+.realizar-pedido-content {
+  display: flex;
+  gap: 100px;
+}
+
+.formas-pago {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.contenido-derecho {
+  flex: 2;
+  min-height: 300px;
+}
+
+.subtitulo {
+  font-size: 1.5rem;
+  font-weight: 700;
+  text-align: left;
+  margin: 10px 0;
+}
+
+.subsubtitulo{
+  font-size: 1.2rem;
+  font-weight: 200;
+  text-align: left;
+  margin: 10px 0;
+}
+
+.forma-pago-btn {
+  padding: 12px 15px;
+  border: 1px solid #c0a080;
+  background-color: white;
+  border-radius: 5px;
+  text-align: left;
+  cursor: pointer;
+  font-size: 16px;
+  transition: all 0.2s;
+}
+
+.forma-pago-btn.active {
+  background-color: #c0a080;
+  color: white;
+}
+
+.forma-pago-btn:hover:not(.active) {
+  background-color: #f5f0e8;
+}
+
+.direcciones-container {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.direccion-btn {
+  padding: 12px 15px;
+  border: 1px solid #c0a080;
+  background-color: white;
+  border-radius: 5px;
+  text-align: left;
+  cursor: pointer;
+  font-size: 16px;
+  transition: all 0.2s;
+}
+
+.direccion-btn.active {
+  background-color: #c0a080;
+  color: white;
+}
+
+.direccion-btn:hover:not(.active) {
+  background-color: #f5f0e8;
+}
+
+.direccion-detalles {
+  margin-top: 15px;
+  padding-left: 5vh;
+  background-color: #f9f3e9;
+  border-radius: 5px;
+  text-align: left;
+  border: 1px solid #e0d0b0;
+}
+
+.texto-direccion {
+  font-size: 16px;
+  margin-bottom: 2vh;
+}
+
+.nota-transferencia {
+  margin-top: 20px;
+  padding: 15px;
+  background-color: #f9f3e9;
+  border-radius: 5px;
+}
+
+.nota-transferencia h3 {
+  font-size: 16px;
+  margin-bottom: 5px;
+}
+
+.punto-entrega {
+  padding: 15px;
+  border-radius: 5px;
+}
+
+.confirmar-container {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 30px;
+}
+
+.formulario-container{
+  display: flex;
+  flex-direction: column;
+  border-radius: 5px;
+  padding-left: 50px;
+}
+
+.confirmar-btn {
+  padding: 10px 25px;
+  background-color: #8a7666;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.2s;
+}
+
+.confirmar-btn:hover {
+  background-color: #6d5d4e;
+}
+
