@@ -1,17 +1,22 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import "./estilos/carrito.css";
 import { TarjetaProductoCart } from "./TarjetaProductoCart";
 import { ModalMensaje } from "../modalMensaje/modalMensaje";
+import { UserContext } from '../../context/UserContext';
 
 export function Carrito() {
+  const { usuario, token } = useContext(UserContext);
   const [modalQuitar, setModalQuitar] = useState(false);
   const [modalComprar, setModalComprar] = useState(false);
-  const [carrito, setCarrito] = useState({ listado: [], total: 0 }); // Ahora es un objeto
-  const usuario = 6; // CAMBIAR ESTO POR EL ID DEL USUARIO LOGUEADO
+  const [carrito, setCarrito] = useState({ listado: [], total: 0 });
 
   const obtenerCarrito = async () => {
     try {
-      const response = await fetch(`${import.meta.env.VITE_BACK_URL}/cliente/${usuario}/carrito`);
+      const response = await fetch(`http://localhost:3000/api/cliente/${encodeURIComponent(usuario.cliente_id)}/carrito`, {
+        headers: {
+          'Authorization': `Bearer ${token}`
+        }
+      });
       if (!response.ok) {
         throw new Error("Error al obtener el carrito");
       }
@@ -24,24 +29,26 @@ export function Carrito() {
   };
 
   useEffect(() => {
-    obtenerCarrito();
-
-    const handleStorageChange = async () => {
-      await obtenerCarrito();
-    };
-
-    window.addEventListener("storage", handleStorageChange);
-
-    return () => {
-      window.removeEventListener("storage", handleStorageChange);
-    };
-  }, []);
+    if (usuario && usuario.cliente_id && token) {
+      obtenerCarrito();
+      
+      const handleStorageChange = async () => {
+        await obtenerCarrito();
+      };
+      
+      window.addEventListener("storage", handleStorageChange);
+      
+      return () => {
+        window.removeEventListener("storage", handleStorageChange);
+      };
+    }
+  }, [usuario, token]); 
 
   const removerTodos = async () => {
     try {
-      const response = await fetch(`${import.meta.env.VITE_BACK_URL}/cliente/${usuario}/carritoVaciar`, {
+      const response = await fetch(`http://localhost:3000/api/cliente/${usuario.cliente_id}/carritoVaciar`, {
         method: "DELETE",
-        headers: { "Content-Type": "application/json" },
+        headers: { "Content-Type": "application/json", 'Authorization': `Bearer ${token}` },
       });
 
       if (!response.ok) {

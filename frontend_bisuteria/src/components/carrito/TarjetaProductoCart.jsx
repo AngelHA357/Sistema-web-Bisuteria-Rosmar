@@ -9,7 +9,7 @@ export function TarjetaProductoCart({ producto, cantidad }) {
   const removerProducto = async () => {
     try {
       const response = await fetch(
-        `${import.meta.env.VITE_BACK_URL}/carrito/quitarUno`,
+        `http://localhost:3000/api/carrito/quitarUno`,
         {
           method: "PUT",
           headers: {

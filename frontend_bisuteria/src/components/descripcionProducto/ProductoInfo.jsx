@@ -92,17 +92,25 @@ export function ProductoInfo() {
     const agregarCarrito = async () => {
         try {
             const cantidad = document.querySelector('.cantidad-input').value;
+            console.log('Token:', token);
             const response = await fetch(`http://localhost:3000/api/carrito`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                     'Authorization': `Bearer ${token}` // Add token here too
                 },
-                body: JSON.stringify({ idCliente: usuario.id, idProducto: id, cantidad: Number(cantidad) })
+                body: JSON.stringify({
+                    idCliente: usuario.cliente_id,
+                    idProducto: id,       
+                    cantidad: Number(cantidad)
+                  })
             });
     
             if (!response.ok) {
-                throw new Error('Error al agregar producto al carrito');
+                const errorData = await response.json();
+                console.log('Response status:', response.status);
+                console.log('Error response:', errorData);
+                throw new Error(`Error al agregar producto al carrito: ${errorData.message}`);
             }
     
             window.dispatchEvent(new Event("storage"));

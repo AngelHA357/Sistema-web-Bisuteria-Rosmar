@@ -7,9 +7,16 @@ export function TarjetaProducto({ image, name, price, category, productId }) {
   const navigate = useNavigate();
 
   const handleClick = () => {
-    navigate(`/producto/${productId}`);
-    window.scrollTo(0, 0);
+    // Make sure productId is valid before navigation
+    if (productId) {
+      console.log("Navigating to product with ID:", productId);
+      navigate(`/producto/${productId}`);
+      window.scrollTo(0, 0);
+    } else {
+      console.error("Product ID is undefined or invalid");
+    }
   };
+
 
   return (
     <div className="product-card" onClick={handleClick}>
