@@ -127,7 +127,7 @@ export function AccesoUsuario() {
       return;
     }
 
-    const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&-_])[A-Za-z\d@$!%*?&-_]{8,}$/;
+    const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&-_])[A-Za-z\d@$.!%*?&-_]{8,}$/;
     if (!passwordRegex.test(formData.password)) {
       setMensaje('La contraseña debe tener un carácter especial, una mayúscula, una minúscula y un número por lo menos, y una longitud mínima de 8 caracteres');
       return;

@@ -1,6 +1,5 @@
 import React, { useState, useContext, useEffect } from 'react';
 import FormularioDireccion from "./FormDireccion"
-import ResumenPedido from './resumenPedido';
 import { UserContext } from '../../context/UserContext';
 import { useNavigate } from 'react-router-dom';
 import { BarraNavegacion } from '../catalogoProductos/BarraNavegacion';
@@ -43,7 +42,7 @@ const RealizarPedido = () => {
       setIsLoading(true);
       setError(null);
 
-      const clienteId = usuario.id;
+      const clienteId = usuario.cliente_id;
 
       if (!clienteId) {
         setError('No se pudo identificar al cliente. Por favor, inicie sesión nuevamente.');
@@ -52,8 +51,6 @@ const RealizarPedido = () => {
       }
 
       const url = `http://localhost:3000/api/cliente/${clienteId}/direcciones`;
-
-      console.log('Fetching direcciones from:', url);
 
       const response = await fetch(url, {
         headers: {
@@ -97,7 +94,7 @@ const RealizarPedido = () => {
 
   const handleGuardarDireccion = async (nuevaDireccion) => {
     try {
-      const clienteId = usuario.id;
+      const clienteId = usuario.cliente_id;
 
       if (!clienteId) {
         alert('No se pudo identificar al cliente. Por favor, inicie sesión nuevamente.');
@@ -112,23 +109,17 @@ const RealizarPedido = () => {
         },
         body: JSON.stringify({
           ...nuevaDireccion,
-          clienteId: clienteId
+          idCliente: clienteId
         })
       });
 
       const data = await response.json();
-
       if (response.ok) {
         await fetchDirecciones();
-
         const nuevaDireccionId = data.id;
         if (nuevaDireccionId) {
           setDireccionSeleccionada(nuevaDireccionId);
-        } else if (direccionesGuardadas.length > 0) {
-          setDireccionSeleccionada(direccionesGuardadas[direccionesGuardadas.length - 1].id);
         }
-
-        alert('Dirección guardada correctamente');
       } else {
         alert('Error al guardar la dirección: ' + (data.message || 'Error desconocido'));
       }
@@ -142,28 +133,23 @@ const RealizarPedido = () => {
   const handleCancelarFormulario = () => {
     setMostrarFormulario(false)
   }
+  const direccionElegida = direccionesGuardadas.find((dir) => dir.id === direccionSeleccionada)
 
   const handleContinuar = () => {
-    setCurrentScreen("resumenPedido")
+    if (!direccionElegida) {
+      alert("Por favor, selecciona una dirección válida")
+    } else {
+      setCurrentScreen("resumenPedido")
+      navigate('/resumenPedido', {
+        state: { formaPago, direccionElegida, resumenData }
+      });
+    }
   }
 
   const handleVolver = () => {
     setCurrentScreen("realizarPedido")
   }
 
-  const direccionElegida = direccionesGuardadas.find((dir) => dir.id === direccionSeleccionada)
-
-  if (currentScreen === "resumenPedido") {
-    return (
-      <ResumenPedido
-        resumenData={resumenData}
-        formaPago={formaPago}
-        direccionSeleccionada={direccionSeleccionada}
-        direccionesGuardadas={direccionesGuardadas}
-        onVolver={handleVolver}
-      />
-    )
-  }
 
   return (
     <>
@@ -189,7 +175,7 @@ const RealizarPedido = () => {
               </button>
             </div>
 
-            {/* Columna derecha - Contenido dinámico */}
+            {/* Columna derecha*/}
             <div className="contenido-derecho">
               {formaPago === "presencial" && (
                 <div className="punto-entrega">
@@ -241,11 +227,6 @@ const RealizarPedido = () => {
                       <p className='texto-direccion'>
                         <strong>Colonia:</strong> {direccionElegida.colonia}
                       </p>
-                      {direccionElegida.indicaciones && (
-                        <p className='texto-direccion'>
-                          <strong>Indicaciones extras:</strong> {direccionElegida.indicaciones}
-                        </p>
-                      )}
                     </div>
                   )}
 

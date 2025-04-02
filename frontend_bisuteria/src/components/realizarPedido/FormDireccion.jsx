@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react"
-import useDipomex from "./hooks/useDipomex";
+import direccionCP from "./hooks/direccionCP";
 import "./estilos/formDireccion.css"
 
 const FormularioDireccion = ({ onGuardar, onCancelar }) => {
@@ -8,21 +8,31 @@ const FormularioDireccion = ({ onGuardar, onCancelar }) => {
         numeroExterior: "",
         numeroInterior: "",
         codigoPostal: "",
-        esatdo: "",
+        estado: "",
         ciudad: "",
         colonia: "",
-        indicaciones: "",
     });
 
-    const { datos, error, cargando } = useDipomex(formData.codigoPostal);
+    const [errors, setErrors] = useState({});
+
+    const { datos, error, cargando } = direccionCP(formData.codigoPostal);
 
     const handleChange = (e) => {
         const { name, value } = e.target
         setFormData((prev) => ({
             ...prev,
             [name]: value,
-        }))
-    }
+        }));
+
+        const { errors } = validarDireccion({
+            ...formData,
+            [name]: value
+          });
+          setErrors(prev => ({
+            ...prev,
+            [name]: errors[name] || ''
+          }));
+    };
 
     useEffect(() => {
         if (datos) {
@@ -30,15 +40,63 @@ const FormularioDireccion = ({ onGuardar, onCancelar }) => {
                 ...prev,
                 estado: datos.estado || "",
                 ciudad: datos.municipio || "",
-                colonia: datos.colonias?.[0]?.colonia || "",
+                colonia: datos.colonias?.[0] || "",
             }));
         }
     }, [datos]);
 
     const handleSubmit = (e) => {
         e.preventDefault()
+
+        const { isValid, errors } = validarDireccion(formData);
+
+        if (!isValid) {
+           setErrors(errors);
+           return;
+        }
+
         onGuardar(formData)
     }
+
+    const validarDireccion = (formData) => {
+        const errors = {};
+        let isValido = true;
+
+        if (!formData.calle?.trim()) {
+            errors.calle = "La calle es requerida";
+            isValido = false;
+        } else if (formData.calle.length < 3) {
+            errors.calle = "La calle debe tener al menos 3 caracteres";
+            isValido = false;
+        } else if (!/^[a-zA-Z0-9\sñÑáéíóúÁÉÍÓÚ.-]+$/.test(formData.calle)) {
+            errors.calle = "La calle contiene caracteres no permitidos";
+            isValido = false;
+        }
+
+        if (!formData.numeroExterior?.trim()) {
+            errors.numeroExterior = "El número exterior es requerido";
+            isValido = false;
+        } else if (!/^[0-9a-zA-Z-]+$/.test(formData.numeroExterior)) {
+            errors.numeroExterior = "El número exterior solo puede contener números, letras y guiones";
+            isValido = false;
+        } else if (formData.numeroExterior.length > 10) {
+            errors.numeroExterior = "El número exterior no puede exceder 10 caracteres";
+            isValido = false;
+        }
+
+        const numInt = formData.numeroInterior?.trim();
+        if (numInt) {
+            if (!/^[0-9a-zA-Z-]+$/.test(numInt)) {
+                errors.numeroInterior = "El número interior solo puede contener números, letras y guiones";
+                isValido = false;
+            } else if (numInt.length > 10) {
+                errors.numeroInterior = "El número interior no puede exceder 10 caracteres";
+                isValido = false;
+            }
+        }
+
+        return { isValido, errors };
+    };
 
     return (
         <form className="formulario-direccion" onSubmit={handleSubmit}>
@@ -60,25 +118,27 @@ const FormularioDireccion = ({ onGuardar, onCancelar }) => {
 
             <div className="form-group">
                 <label htmlFor="estado">Estado:</label>
-                <input 
-                    type="text" 
-                    id="estado" 
-                    name="estado" 
-                    value={formData.estado} 
+                <input
+                    type="text"
+                    id="estado"
+                    name="estado"
+                    value={formData.estado}
                     onChange={handleChange}
-                    required 
+                    required
+                    disabled={cargando || !!datos}
                 />
             </div>
 
             <div className="form-group">
                 <label htmlFor="ciudad">Ciudad:</label>
-                <input 
-                    type="text" 
-                    id="ciudad" 
-                    name="ciudad" 
-                    value={formData.ciudad} 
-                    onChange={handleChange} 
-                    required 
+                <input
+                    type="text"
+                    id="ciudad"
+                    name="ciudad"
+                    value={formData.ciudad}
+                    onChange={handleChange}
+                    required
+                    disabled={cargando || !!datos}
                 />
             </div>
 
@@ -90,7 +150,7 @@ const FormularioDireccion = ({ onGuardar, onCancelar }) => {
                     value={formData.colonia}
                     onChange={handleChange}
                     required
-                    disabled={!datos || !datos.colonias?.length}
+                    disabled={!datos || !datos || !datos.colonias?.length}
                 >
                     <option value="">Selecciona una colonia</option>
                     {datos?.colonias?.map((colonia, index) => (
@@ -102,15 +162,16 @@ const FormularioDireccion = ({ onGuardar, onCancelar }) => {
             </div>
 
             <div className="form-group">
-                <label htmlFor="direccion">Calle:</label>
+                <label htmlFor="calle">Calle:</label>
                 <input
                     type="text"
-                    id="direccion"
-                    name="direccion"
-                    value={formData.direccion}
+                    id="calle"
+                    name="calle"
+                    value={formData.calle}
                     onChange={handleChange}
                     required
                 />
+                {errors.calle && <span className="error">{errors.calle}</span>}
             </div>
 
             <div className="form-row">
@@ -124,6 +185,7 @@ const FormularioDireccion = ({ onGuardar, onCancelar }) => {
                         onChange={handleChange}
                         required
                     />
+                    {errors.numeroExterior && <span className="error">{errors.numeroExterior}</span>}
                 </div>
 
                 <div className="form-group numero-interior">
@@ -137,21 +199,11 @@ const FormularioDireccion = ({ onGuardar, onCancelar }) => {
                         value={formData.numeroInterior}
                         onChange={handleChange}
                     />
+                    {errors.numeroInterior && <span className="error">{errors.numeroInterior}</span>}
                 </div>
             </div>
 
-            <div className="form-group">
-                <label htmlFor="indicaciones">Indicaciones extras:</label>
-                <input
-                    type="text"
-                    id="indicaciones"
-                    name="indicaciones"
-                    value={formData.indicaciones}
-                    onChange={handleChange}
-                />
-            </div>
-
-            <div className="form-actions">
+            <div className="form-actions" onSubmit={handleSubmit}>
                 <button type="submit" className="guardar-btn">
                     Guardar
                 </button>

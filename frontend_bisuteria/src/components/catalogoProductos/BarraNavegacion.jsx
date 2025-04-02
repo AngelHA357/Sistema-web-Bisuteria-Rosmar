@@ -15,9 +15,13 @@ export function BarraNavegacion() {
     setShowLogout(!showLogout);
   };
 
+  const handleMostrarCatalogo = () => {
+    navigate('/catalogo');
+  }
+
   return (
     <header className="barraNav">
-      <img src={logoBisuteria} alt="Logo Rosmar Bisutería" className="logo"/>
+      <img src={logoBisuteria} alt="Logo Rosmar Bisutería" className="logo" onClick={handleMostrarCatalogo}/>
       <div className="user-actions">
         <button>
           <FontAwesomeIcon icon={faShoppingCart} />

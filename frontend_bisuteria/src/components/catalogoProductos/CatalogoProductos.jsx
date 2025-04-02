@@ -147,7 +147,7 @@ export function CatalogoProductos() {
             Nuevo producto
           </button>
         )}
-        {usuario && usuario.tipo === 'Administrador' && (
+        {usuario && (
           <button id="btn-add-product" onClick={handleRealizarPedido}>
             Realizar pedido
           </button>
