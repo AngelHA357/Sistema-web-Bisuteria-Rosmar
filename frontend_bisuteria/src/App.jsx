@@ -8,7 +8,9 @@ import { NuevoProducto } from './components/catalogoProductos/NuevoProducto';
 import { BarraNavegacion } from './components/catalogoProductos/BarraNavegacion';
 import { ProductoInfo } from './components/descripcionProducto/ProductoInfo';
 import { PiePagina } from './components/piePagina/PiePagina';
-import { Carrito } from './components/carrito/Carrito'
+import { Carrito } from './components/carrito/Carrito';
+import  ResumenPedido from './components/realizarPedido/ResumenPedido';
+import  RealizarPedido  from './components/realizarPedido/RealizarPedido';
 
 function App() {
   return (
@@ -20,6 +22,8 @@ function App() {
           <Route path="/nuevoProducto" element={<NuevoProducto />} />
           <Route path="/producto/:id" element={<><BarraNavegacion /><ProductoInfo /><PiePagina /></>} />
           <Route path="/carrito" element={<><BarraNavegacion /><Carrito /><PiePagina /></>} />
+          <Route path="/realizarPedido" element={<RealizarPedido />} />
+          <Route path="/resumenPedido" element={<ResumenPedido />} />
         </Routes>
       </Router>
     </UserProvider>

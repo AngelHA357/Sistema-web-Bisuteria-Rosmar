@@ -3,12 +3,15 @@ import FormularioDireccion from "./FormDireccion"
 import { UserContext } from '../../context/UserContext';
 import { useNavigate } from 'react-router-dom';
 import { BarraNavegacion } from '../catalogoProductos/BarraNavegacion';
+import { ModalMensaje } from "../modalMensaje/modalMensaje";
 import './estilos/realizarPedido.css';
 
 const RealizarPedido = () => {
   const navigate = useNavigate();
   const [currentScreen, setCurrentScreen] = useState("realizarPedido");
   const [formaPago, setFormaPago] = useState("");
+  const [modalOpen, setModalOpen] = useState(false);
+  const [mensajeModal, setMensajeModal] = useState(false);
   const [direccionSeleccionada, setDireccionSeleccionada] = useState(null);
   const [mostrarFormulario, setMostrarFormulario] = useState(false);
   const [direccionesGuardadas, setDireccionesGuardadas] = useState([]);
@@ -16,12 +19,6 @@ const RealizarPedido = () => {
   const [error, setError] = useState(null);
 
   const { usuario, token } = useContext(UserContext);
-
-  const resumenData = {
-    productos: { cantidad: 2, total: 69.99 },
-    envio: 70.0,
-    total: 139.99,
-  };
 
   useEffect(() => {
     if (!usuario || !token) {
@@ -135,21 +132,93 @@ const RealizarPedido = () => {
   }
   const direccionElegida = direccionesGuardadas.find((dir) => dir.id === direccionSeleccionada)
 
-  const handleContinuar = () => {
-    if (!direccionElegida) {
-      alert("Por favor, selecciona una dirección válida")
-    } else {
-      setCurrentScreen("resumenPedido")
-      navigate('/resumenPedido', {
-        state: { formaPago, direccionElegida, resumenData }
-      });
+  const handleContinuar = async () => {
+    try {
+      if (formaPago === "presencial") {
+        const datosPedido = {
+          idCliente: usuario.cliente_id,
+          idDireccion: 1, // ID de la dirección de la administradora
+          metodoPago: "Presencial"
+        };
+
+        const respuesta = await crearPedido(datosPedido);
+
+        if (respuesta.ok) {
+          const pedidoCreado = await respuesta.json();
+
+          setMensajeModal("¡Pedido creado con éxito!");
+          setModalOpen(true);
+
+          setTimeout(() => {
+            setModalOpen(false);
+            setCurrentScreen("resumenPedido");
+            navigate('/resumenPedido', {
+              state: {
+                idPedido: pedidoCreado.id,
+                metodoPago: "Presencial"
+              }
+            });
+          }, 2000);
+        } else {
+          const error = await respuesta.json();
+          alert("Error al crear el pedido: " + (error.message || "Error desconocido"));
+        }
+      }
+
+      else if (formaPago === "transferencia") {
+        if (!direccionElegida) {
+          alert("Por favor, selecciona una dirección válida");
+          return;
+        }
+
+        const datosPedido = {
+          idCliente: usuario.cliente_id,
+          idDireccion: direccionElegida.id,
+          metodoPago: "Transferencia"
+        };
+
+        const respuesta = await crearPedido(datosPedido);
+
+        if (respuesta.ok) {
+          const pedidoCreado = await respuesta.json();
+
+          setMensajeModal("¡Pedido creado con éxito!");
+          setModalOpen(true);
+
+          setTimeout(() => {
+            setModalOpen(false);
+            setCurrentScreen("resumenPedido");
+            navigate('/resumenPedido', {
+              state: { 
+                idPedido: pedidoCreado.id,
+                metodoPago: "Transferencia",
+                direccion: direccionElegida 
+              }
+            });
+          }, 2000);
+        } else {
+          const error = await respuesta.json();
+          alert("Error al crear el pedido: " + (error.message || "Error desconocido"));
+        }
+      } else {
+        alert("Por favor, selecciona un método de pago");
+      }
+    } catch (error) {
+      console.error("Error al procesar el pedido:", error);
+      alert("Error al procesar el pedido: " + error.message);
     }
-  }
+  };
 
-  const handleVolver = () => {
-    setCurrentScreen("realizarPedido")
-  }
-
+  const crearPedido = async (datosPedido) => {
+    return fetch('http://localhost:3000/api/pedido', {
+      method: 'POST',
+      headers: {
+        'Authorization': `Bearer ${token}`,
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(datosPedido)
+    });
+  };
 
   return (
     <>
@@ -259,6 +328,11 @@ const RealizarPedido = () => {
             </div>
           )}
         </div>
+        <ModalMensaje
+          isOpen={modalOpen}
+          onClose={() => setModalOpen(false)}
+          mensaje={mensajeModal}
+        />
       </div>
     </>
   )

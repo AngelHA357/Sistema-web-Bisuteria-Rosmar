@@ -3,8 +3,10 @@ import "./estilos/carrito.css";
 import { TarjetaProductoCart } from "./TarjetaProductoCart";
 import { ModalMensaje } from "../modalMensaje/modalMensaje";
 import { UserContext } from '../../context/UserContext';
+import { useNavigate } from 'react-router-dom';
 
 export function Carrito() {
+  const navigate = useNavigate();
   const { usuario, token } = useContext(UserContext);
   const [modalQuitar, setModalQuitar] = useState(false);
   const [modalComprar, setModalComprar] = useState(false);
@@ -64,8 +66,7 @@ export function Carrito() {
   };
 
   const comprar = () => {
-    window.dispatchEvent(new Event("storage"));
-    setModalComprar(true);
+    navigate("/realizarPedido");
   };
 
   const totalProductos = carrito.listado.length;

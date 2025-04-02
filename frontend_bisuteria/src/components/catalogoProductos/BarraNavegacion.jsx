@@ -34,18 +34,18 @@ export function BarraNavegacion() {
   // useEffect para obtener el conteo inicial del carrito (del segundo código)
   useEffect(() => {
     const fetchCartCount = async () => {
-      if (usuario?.id) { // Asegurarse de que usuario.id esté definido
+      if (usuario?.cliente_id) { 
         const count = await getCartItemsCount();
         setCartItemsCount(count);
       }
     };
     fetchCartCount();
-  }, [usuario?.id, token]); // Dependencias: usuario.id y token
+  }, [usuario?.cliente_id, token]); // Dependencias: usuario.id y token
 
   // Evento para actualizar el conteo del carrito cuando cambia el almacenamiento (del segundo código)
   useEffect(() => {
     const handleStorageChange = async () => {
-      if (usuario?.id) {
+      if (usuario?.cliente_id) {
         const count = await getCartItemsCount();
         setCartItemsCount(count);
       }
@@ -57,7 +57,7 @@ export function BarraNavegacion() {
     return () => {
       window.removeEventListener('storage', handleStorageChange);
     };
-  }, [usuario?.id, token]); // Dependencias: usuario.id y token
+  }, [usuario?.cliente_id, token]); // Dependencias: usuario.id y token
 
   // Mantener la funcionalidad del dropdown (del primer código)
   const handleUserButtonClick = () => {
