@@ -161,6 +161,7 @@ export function CatalogoProductos() {
                 name={producto.nombre}
                 price={producto.precio}
                 category={producto.categoria.nombre}
+                productId={producto.id}
               />
             ))
           ) : (

@@ -72,9 +72,9 @@ const productosInsercion: ProductoCreateDTO[] = [
 ]
 
 const categoriasInsercion = [
-  { nombre: "Pulseras" },
-  { nombre: "Aretes" },
   { nombre: "Collares" },
+  { nombre: "Aretes" },
+  { nombre: "Pulseras" },
   { nombre: "Plumas" },
   { nombre: "Otros" }
 ];

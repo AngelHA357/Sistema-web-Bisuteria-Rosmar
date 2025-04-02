@@ -1,5 +1,16 @@
 [
     {
+      "id": 0,
+      "tipo": "administrador",
+      "contrasena": "12345678",
+      "usuario": "admin_user",
+      "correo": "a@a.com",
+      "nombre": "Carlos",
+      "apellidoPaterno": "Gutiérrez",
+      "apellidoMaterno": "López",
+      "direccion_id": 100
+    },
+    {
       "id": 1,
       "tipo": "administrador",
       "contrasena": "hashed_password_admin",

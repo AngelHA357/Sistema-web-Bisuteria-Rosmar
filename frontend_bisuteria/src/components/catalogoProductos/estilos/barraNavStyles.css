@@ -1,77 +1,77 @@
 .barraNav {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 15px 40px;
-  background-color: #f5e9dc;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
-  box-sizing: border-box;
-  width: 100%;
-  position: sticky;
-  top: 0;
-  z-index: 1000;
-}
-
-.barraNav .logo {
-  max-width: 140px;
-  transition: transform 0.3s ease;
-}
-
-.barraNav .logo:hover {
-  transform: scale(1.05);
-}
-
-.barraNav .user-actions {
-  display: flex;
-  gap: 20px;
-  align-items: center;
-}
-
-.user-button-container {
-  position: relative;
-}
-
-.barraNav .user-actions button {
-  background: none;
-  border: none;
-  color: #4a4a4a;
-  font-size: 16px;
-  font-weight: 500;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  padding: 8px 15px;
-  border-radius: 20px;
-  transition: all 0.3s ease;
-}
-
-.barraNav .user-actions button:hover {
-  background-color: #e0d4c5;
-  color: #2e2e2e;
-}
-
-.logout-btn {
-  position: absolute;
-  top: 100%;
-  right: 0;
-  background-color: #e0d4c5; 
-  color: #4a4a4a; 
-  font-size: 14px;
-  font-weight: 600;
-  padding: 8px 15px;
-  border-radius: 20px;
-  border: 1px solid #8e6f4e; 
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); 
-  cursor: pointer;
-  margin-top: 8px; 
-  transition: all 0.3s ease; 
-  z-index: 1001;
-}
-
-.logout-btn:hover {
-  background-color: #8e6f4e; 
-  color: #fff; 
-  border-color: #4a4a4a; 
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15); 
-}
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 40px;
+    background-color: #f5e9dc;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    box-sizing: border-box;
+    width: 100%;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+  }
+  
+  .barraNav .logo {
+    max-width: 140px;
+    transition: transform 0.3s ease;
+  }
+  
+  .barraNav .logo:hover {
+    transform: scale(1.05);
+  }
+  
+  .barraNav .user-actions {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+  }
+  
+  .user-button-container {
+    position: relative;
+  }
+  
+  .barraNav .user-actions button {
+    background: none;
+    border: none;
+    color: #4a4a4a;
+    font-size: 16px;
+    font-weight: 500;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 15px;
+    border-radius: 20px;
+    transition: all 0.3s ease;
+  }
+  
+  .barraNav .user-actions button:hover {
+    background-color: #e0d4c5;
+    color: #2e2e2e;
+  }
+  
+  .logout-btn {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    background-color: #e0d4c5; 
+    color: #4a4a4a; 
+    font-size: 14px;
+    font-weight: 600;
+    padding: 8px 15px;
+    border-radius: 20px;
+    border: 1px solid #8e6f4e; 
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); 
+    cursor: pointer;
+    margin-top: 8px; 
+    transition: all 0.3s ease; 
+    z-index: 1001;
+  }
+  
+  .logout-btn:hover {
+    background-color: #8e6f4e; 
+    color: #fff; 
+    border-color: #4a4a4a; 
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15); 
+  }

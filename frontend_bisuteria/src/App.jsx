@@ -5,8 +5,10 @@ import { AccesoUsuario } from './components/accesoUsuario/AccesoUsuario';
 import { UserProvider } from './context/UserContext';
 import { CatalogoProductos } from './components/catalogoProductos/CatalogoProductos';
 import { NuevoProducto } from './components/catalogoProductos/NuevoProducto';
-import  ResumenPedido  from './components/realizarPedido/ResumenPedido';
-import  RealizarPedido  from './components/realizarPedido/RealizarPedido';
+import { BarraNavegacion } from './components/catalogoProductos/BarraNavegacion';
+import { ProductoInfo } from './components/descripcionProducto/ProductoInfo';
+import { PiePagina } from './components/piePagina/PiePagina';
+import { Carrito } from './components/carrito/Carrito'
 
 function App() {
   return (
@@ -16,8 +18,8 @@ function App() {
           <Route path="/" element={<AccesoUsuario />} />
           <Route path="/catalogo" element={<CatalogoProductos />} />
           <Route path="/nuevoProducto" element={<NuevoProducto />} />
-          <Route path="/realizarPedido" element={<RealizarPedido />} />
-          <Route path="/resumenPedido" element={<ResumenPedido />} />
+          <Route path="/producto/:id" element={<><BarraNavegacion /><ProductoInfo /><PiePagina /></>} />
+          <Route path="/carrito" element={<><BarraNavegacion /><Carrito /><PiePagina /></>} />
         </Routes>
       </Router>
     </UserProvider>

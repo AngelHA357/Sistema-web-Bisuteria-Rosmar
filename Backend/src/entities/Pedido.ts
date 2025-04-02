@@ -26,12 +26,7 @@ export class Pedido{
       name:"tipo",
       default:TipoPedido.PENDIENTE})
   tipo: TipoPedido;
-  @Column({
-      type:"float",
-      name:"total",
-      default:0
-    })
-  total: number;
+
   @ManyToOne(() => Direccion)
   @JoinColumn({name:"direccion_id"})
   direccion: Direccion;
@@ -61,6 +56,6 @@ export class Pedido{
       default:MetodoPago.EFECTIVO})
   metodoPago: MetodoPago;
 
-  @OneToMany(() => PedidoProducto, producto => producto.pedido)
+  @OneToMany(() => PedidoProducto, producto => producto.pedido, {eager:true})
   productos: PedidoProducto[];
 }

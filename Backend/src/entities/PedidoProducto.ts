@@ -1,4 +1,4 @@
-import { Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
 import { Pedido } from "./Pedido";
 import { Producto } from "./Producto";
 
@@ -7,10 +7,15 @@ export class PedidoProducto {
   @PrimaryGeneratedColumn()
   id: number;
   
+  @Column({name: 'cantidad', type: "int"})
   cantidad: number;
-  precio: number;
-  total: number;
 
+  @Column({
+    type:"float",
+    nullable:false
+  })
+  precio: number;
+  
   @ManyToOne(() => Pedido, pedido => pedido.productos)
   @JoinColumn({ name: 'pedido_id' })
   pedido: Pedido;
