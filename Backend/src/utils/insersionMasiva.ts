@@ -10,64 +10,99 @@ const productosInsercion: ProductoCreateDTO[] = [
     nombre: "Collar Perlas Elegante",
     descripcion: "Hermoso collar de perlas naturales con diseño clásico.",
     precio: 259.99,
-    imagenes: ["https://scontent.fcen4-1.fna.fbcdn.net/v/t39.30808-6/484350913_656392170226223_820411654458778952_n.jpg?stp=dst-jpg_p526x296_tt6&_nc_cat=109&ccb=1-7&_nc_sid=833d8c&_nc_ohc=YXzlTftRsPMQ7kNvgEkSLDK&_nc_oc=AdlKAymI8SRRBFyT6WyDGyBy0U4oydlP2e1H1PftyE-EsPwJl9B42xoUmJ8o0wLYkTc&_nc_zt=23&_nc_ht=scontent.fcen4-1.fna&_nc_gid=A1WDu-vCA1YQ1hCQuMwvPg&oh=00_AYHXQ4N6D-1lgBOcy11JSRFGl1gNEsyN_lWZ1LWXq-MmOA&oe=67E64223"],
+    imagenes: ["https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&q=80"],
     categoria: 1
   },
   {
     nombre: "Aretes de Oro Minimalistas",
     descripcion: "Aretes pequeños de oro con un diseño sofisticado.",
     precio: 199.99,
-    imagenes: ["https://scontent.fcen4-1.fna.fbcdn.net/v/t39.30808-6/484328921_656384583560315_6693046665235181408_n.jpg?_nc_cat=109&ccb=1-7&_nc_sid=833d8c&_nc_ohc=LSPvUlOHADgQ7kNvgE9lkIa&_nc_oc=AdkNcz5XJyjqan92iGk3Ohu93gHpoaN1GlhG0W6AookxkF0-PoTf9Gdp_rpxc-RwWks&_nc_zt=23&_nc_ht=scontent.fcen4-1.fna&_nc_gid=q2DzdzvnaTzp0U9tKLk6nA&oh=00_AYGovGttsCo0CWU0o_aIO0H0KXv1P-L4MeL0DdtfRf8kNw&oe=67E6596E"],
+    imagenes: ["https://images.unsplash.com/photo-1630019852942-f89202989a59?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&q=80"],
     categoria: 2
-  },
-  {
-    nombre: "Pulsera de Cuentas Multicolor",
-    descripcion: "Pulsera artesanal con cuentas de colores vibrantes.",
-    precio: 89.99,
-    imagenes: ["https://scontent.fcen4-1.fna.fbcdn.net/v/t39.30808-6/481771254_651903487341758_1084773403351130009_n.jpg?_nc_cat=101&ccb=1-7&_nc_sid=833d8c&_nc_ohc=qG47xWAAC-AQ7kNvgG45MSr&_nc_oc=Adk5SSeayQCI3jxp97eQF4GdOWPbzfbgeKVMZ2YlvCVZmWdou60gO9G7Ftm_JYXe2OA&_nc_zt=23&_nc_ht=scontent.fcen4-1.fna&_nc_gid=y_4VmdHoPVnoujmAj09fww&oh=00_AYFGvv-5EyPM1uhs6EzX3zakvLD1MVjNEEBhKrrU0EHgdg&oe=67E653B4"],
-    categoria: 3
   },
   {
     nombre: "Collar con Dije de Corazón",
     descripcion: "Un delicado collar con un dije de corazón chapado en oro.",
     precio: 149.99,
-    imagenes: ["https://scontent.fcen4-1.fna.fbcdn.net/v/t39.30808-6/481225798_649490974249676_7471659358642886970_n.jpg?_nc_cat=109&ccb=1-7&_nc_sid=833d8c&_nc_ohc=vi66aCKqepAQ7kNvgGFyKBj&_nc_oc=AdnLIuG5SIEygOF_UrRWEEnQh8eKTKtJsLQZ1cBoHiL4VM8zAk6DDEwKD8SEMpgezPE&_nc_zt=23&_nc_ht=scontent.fcen4-1.fna&_nc_gid=y02wAHDzOxfFQvceFCrGsQ&oh=00_AYHMXLH5vYTNASbsOH_2KRvarxV0MuiMYacKPQnYUaTsvw&oe=67E64CDE"],
+    imagenes: ["https://images.unsplash.com/photo-1611652022419-a9419f74343d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&q=80"],
     categoria: 1
   },
   {
     nombre: "Aretes de Plata con Zirconia",
     descripcion: "Aretes de plata con zirconia cúbica para un brillo especial.",
     precio: 129.99,
-    imagenes: ["https://scontent.fcen4-1.fna.fbcdn.net/v/t39.30808-6/484171365_656384646893642_8389676014816399857_n.jpg?_nc_cat=101&ccb=1-7&_nc_sid=833d8c&_nc_ohc=OLtBNY2dVYMQ7kNvgHpKQWT&_nc_oc=AdnizFTKeoVfqpnJ9JSZGR73Cuguzh3utkN_8RwJdPQECE9eJXgvoTmaBEA0EvAPKmU&_nc_zt=23&_nc_ht=scontent.fcen4-1.fna&_nc_gid=70kdEvWdux3bSQznDpqq5g&oh=00_AYHCNiz855uoDuoy86JoJiXho4SrcQadP7ZrxDR1nvXnQw&oe=67E63939"],
+    imagenes: ["https://images.unsplash.com/photo-1629224316810-9d8805b95e76?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&q=80"],
     categoria: 2
   },
   {
     nombre: "Pulsera de Cuero Ajustable",
     descripcion: "Pulsera unisex de cuero con cierre ajustable.",
     precio: 109.99,
-    imagenes: ["https://scontent.fcen4-1.fna.fbcdn.net/v/t39.30808-6/482009493_650033530862087_4730789871960272478_n.jpg?_nc_cat=105&ccb=1-7&_nc_sid=833d8c&_nc_ohc=i1oymD5nrisQ7kNvgFU4zHF&_nc_oc=AdlJgU76A-5yMIFled3U0hyRs_I7HwtkkcolUHzB-6TtWY40v3CMVVt4ApSHaWxYZcE&_nc_zt=23&_nc_ht=scontent.fcen4-1.fna&_nc_gid=USeSjNm58oj6DFW0k5H-Jg&oh=00_AYEWXTRGxAsaFD_rP3sHLlpRc-OiaaiiIo56vWL7xqxzkg&oe=67E6398F"],
+    imagenes: ["https://images.unsplash.com/photo-1618403088890-3d9ff6f4c8b1?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&q=80"],
     categoria: 3
   },
   {
     nombre: "Collar con Piedras Naturales",
     descripcion: "Collar largo con piedras naturales de diferentes colores.",
     precio: 179.99,
-    imagenes: ["https://scontent.fcen4-1.fna.fbcdn.net/v/t39.30808-6/481452458_651066720758768_3769090851382930258_n.jpg?_nc_cat=106&ccb=1-7&_nc_sid=833d8c&_nc_ohc=_km1CCtCNf8Q7kNvgG4z2DM&_nc_oc=AdnvQoNvVRv7W0cJtpDyk9m-JSKWdiCtV2xeVaOEsHIrH97ivtOkv1HMslg-VMPM2bc&_nc_zt=23&_nc_ht=scontent.fcen4-1.fna&_nc_gid=W4nKE27QRNrs-xLpNgs7Ng&oh=00_AYHmiU66CzWTBo236WRAYkiFFqR-Iq_zw9Axrgqh0uq1pA&oe=67E62A33"],
+    imagenes: ["https://images.unsplash.com/photo-1611085583191-a3b181a88401?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&q=80"],
     categoria: 1
   },
   {
     nombre: "Aretes de Acero Inoxidable",
     descripcion: "Aretes resistentes y elegantes de acero inoxidable.",
     precio: 99.99,
-    imagenes: ["https://scontent.fcen4-1.fna.fbcdn.net/v/t39.30808-6/484075721_656384546893652_6540463011551668552_n.jpg?_nc_cat=107&ccb=1-7&_nc_sid=833d8c&_nc_ohc=CYNMhiLqOIIQ7kNvgGdqGVf&_nc_oc=AdkfmNNbcWsxic5-GK3_BH0FTfuRli84RemQ8jaC9P2x01fNATKI1joTcC5Z16M1Dsk&_nc_zt=23&_nc_ht=scontent.fcen4-1.fna&_nc_gid=_EnxMN7DqIDtYy3HptqRVA&oh=00_AYE7bJ1nPh-H1x_tp5tczJnHHNb1FvIDDWa2TQOhBSHwug&oe=67E63D90"],
+    imagenes: ["https://images.unsplash.com/photo-1561172478-a203d9c8290e?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&q=80"],
     categoria: 2
   },
   {
     nombre: "Pulsera con Dijes de Estrellas",
     descripcion: "Pulsera con pequeños dijes de estrellas doradas.",
     precio: 119.99,
-    imagenes: ["https://scontent.fcen4-1.fna.fbcdn.net/v/t39.30808-6/482026408_651066467425460_244603235940492449_n.jpg?_nc_cat=107&ccb=1-7&_nc_sid=833d8c&_nc_ohc=nw9xculqpRkQ7kNvgGFoOPX&_nc_oc=Adk4529SRfI0NYk2ebjakFnwghNGixXlN26c0qmo18FmAeREyPpo-9d01TSAYK4W8fw&_nc_zt=23&_nc_ht=scontent.fcen4-1.fna&_nc_gid=wkvNyyal1F6Zdoncf99vMw&oh=00_AYGJs6kj39IsJbMQGHJblCBquR_U0w3PoWVWCOaJHixHNg&oe=67E62B4F"],
+    imagenes: ["https://images.unsplash.com/photo-1611591437281-460bfbe1220a?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&q=80"],
     categoria: 3
+  },
+  {
+    nombre: "Set de Brazaletes Dorados",
+    descripcion: "Conjunto de tres brazaletes delgados bañados en oro de 18k.",
+    precio: 189.99,
+    imagenes: ["https://images.unsplash.com/photo-1603561596112-0a132b757442?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&q=80"],
+    categoria: 3
+  },
+  {
+    nombre: "Aretes Largos con Cristales",
+    descripcion: "Aretes colgantes con cristales transparentes de estilo Art Deco.",
+    precio: 159.99,
+    imagenes: ["https://images.unsplash.com/photo-1589128777073-263566ae5e4d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&q=80"],
+    categoria: 2
+  },
+  {
+    nombre: "Tobillera de Plata con Cascabeles",
+    descripcion: "Tobillera delicada de plata con pequeños dijes de cascabel.",
+    precio: 69.99,
+    imagenes: ["https://images.unsplash.com/photo-1549298222-1c31e8915347?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&q=80"],
+    categoria: 5
+  },
+  {
+    nombre: "Pulsera de Hilo Trenzado",
+    descripcion: "Pulsera artesanal de hilos trenzados en tonos pastel.",
+    precio: 49.99,
+    imagenes: ["https://images.unsplash.com/photo-1598560917807-1bae44bd2be8?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&q=80"],
+    categoria: 3
+  },
+  {
+    nombre: "Anillo Solitario con Circonita",
+    descripcion: "Anillo minimalista con circonita brillante de corte princesa.",
+    precio: 129.99,
+    imagenes: ["https://images.unsplash.com/photo-1605100804763-247f67b3557e?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&q=80"],
+    categoria: 4
+  },
+  {
+    nombre: "Collar con Medallón Vintage",
+    descripcion: "Collar largo con medallón antiguo que puede abrirse para guardar fotos.",
+    precio: 199.99,
+    imagenes: ["https://images.unsplash.com/photo-1599643477877-530eb83abc8e?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&q=80"],
+    categoria: 1
   }
 ]
 
