@@ -138,7 +138,7 @@ const RealizarPedido = () => {
         const datosPedido = {
           idCliente: usuario.cliente_id,
           idDireccion: 1, // ID de la dirección de la administradora
-          metodoPago: "Presencial"
+          metodoPago: "Efectivo"
         };
 
         const respuesta = await crearPedido(datosPedido);
@@ -249,7 +249,7 @@ const RealizarPedido = () => {
               {formaPago === "presencial" && (
                 <div className="punto-entrega">
                   <h2>Punto de entrega:</h2>
-                  <p>(dirección de la administradora)</p>
+                  <p>Calle Pesqueira #123, Colonia Centro, Navojoa, Sonora, C.P. 85830</p>
                 </div>
               )}
 

@@ -110,7 +110,7 @@ const ResumenPedido = () => {
           {metodoPago === "Presencial" && (
             <div className="resumen-item">
               <span className="resumen-label">Punto de entrega</span>
-              <span className="resumen-value">(dirección de la administradora)</span>
+              <span className="resumen-value">Calle Pesqueira #123</span>
             </div>
           )}
 

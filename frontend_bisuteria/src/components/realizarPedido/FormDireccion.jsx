@@ -67,6 +67,9 @@ const FormularioDireccion = ({ onGuardar, onCancelar }) => {
         } else if (formData.calle.length < 3) {
             errors.calle = "La calle debe tener al menos 3 caracteres";
             isValido = false;
+        } else if (formData.calle.length > 50) {
+            errors.calle = "La calle no puede exceder 50 caracteres";
+            isValido = false;
         } else if (!/^[a-zA-Z0-9\sñÑáéíóúÁÉÍÓÚ.-]+$/.test(formData.calle)) {
             errors.calle = "La calle contiene caracteres no permitidos";
             isValido = false;
