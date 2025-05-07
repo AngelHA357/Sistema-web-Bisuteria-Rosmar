@@ -4,7 +4,6 @@ import { ModalMensaje } from "../modalMensaje/modalMensaje";
 
 export function TarjetaProductoCart({ producto, cantidad }) {
   const [modalAbierto, setModalAbierto] = useState(false);
-  const usuario = 6; // CAMBIAR ESTO POR EL ID DEL USUARIO LOGUEADO
 
   const removerProducto = async () => {
     try {
@@ -40,7 +39,7 @@ export function TarjetaProductoCart({ producto, cantidad }) {
   return (
     <div className="producto-card-cart">
       <img
-        src={producto.imagenes[2]}
+        src={producto.imagenes && producto.imagenes.length > 0 ? producto.imagenes[0] : 'default-image.jpg'}
         alt={producto.nombre}
         className="producto-imagen-cart"
       />
